@@ -41,7 +41,7 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.T
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_main);
 		setBehindContentView(R.layout.slidingmenu);
-		getSlidingMenu().setBehindOffset(500);
+		getSlidingMenu().setBehindOffset(100);
 		setSlidingActionBarEnabled(true);
 		final ListView listview = (ListView) findViewById(R.id.slidingmenu);
 
