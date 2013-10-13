@@ -22,6 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.fena.RedProfile"
+            android:label="@string/redprofile_activity" >
+            <intent-filter>
+                <action android:name="android.intent.action.REDPROFILE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

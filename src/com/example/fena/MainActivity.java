@@ -8,6 +8,7 @@ import java.util.Locale;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -59,8 +60,16 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.T
 	        public void onItemClick(AdapterView<?> parent, final View view,
 	            int position, long id) {
 	          final String item = (String) parent.getItemAtPosition(position);
-	          Toast.makeText(getApplicationContext(), "Clicked"+position, Toast.LENGTH_LONG)
-	          .show();
+	          switch(position){
+	          case 0:
+	        		Intent openMainPoint = new Intent("android.intent.action.REDPROFILE");
+					startActivity(openMainPoint);
+	        	  break;
+	          case 1:
+	        	  break;
+	          }
+	          //Toast.makeText(getApplicationContext(), "Clicked"+position, Toast.LENGTH_LONG)
+	          //.show();
 	        }
 
 	      });
