@@ -14,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.InputFilter.LengthFilter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -23,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -59,10 +57,9 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.T
 	        @Override
 	        public void onItemClick(AdapterView<?> parent, final View view,
 	            int position, long id) {
-	          final String item = (String) parent.getItemAtPosition(position);
 	          switch(position){
 	          case 0:
-	        		Intent openMainPoint = new Intent("android.intent.action.REDPROFILE");
+	        		Intent openMainPoint = new Intent("android.intent.action.PROFILE");
 					startActivity(openMainPoint);
 	        	  break;
 	          case 1:

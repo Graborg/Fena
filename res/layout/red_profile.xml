@@ -1,100 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="25sp" />
-
-    <EditText
-        android:id="@+id/etName"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Name"
-        android:inputType="textPersonName" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <requestFocus />
-    </EditText>
+            <TextView
+                android:id="@+id/tvredName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/tvredOccupation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Occupation:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="25sp" />
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter Name"
+                android:inputType="textPersonName" >
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/Occupation"
-        />
+                <requestFocus />
+            </EditText>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="25sp" />
+            <TextView
+                android:id="@+id/tvredOccupation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Occupation:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/etDescription1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="One Word Only" />
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/Occupation" />
 
-    <EditText
-        android:id="@+id/etDescription2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="One Word Only" />
+            <TextView
+                android:id="@+id/tvredDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/etDescription3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="One Word Only" />
+            <EditText
+                android:id="@+id/etDescription1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="One Word Only" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Experience:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="25sp" />
+            <EditText
+                android:id="@+id/etDescription2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="One Word Only" />
 
-    <EditText
-        android:id="@+id/etExper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="160 charachters only"
-        android:inputType="textMultiLine" />
+            <EditText
+                android:id="@+id/etDescription3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="One Word Only" />
 
-    <Button
-        android:id="@+id/bSave"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="106dp"
-        android:layout_height="wrap_content"
-        android:text="Save" />
+            <TextView
+                android:id="@+id/tvredExp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experience:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="102dp"
-        android:layout_height="wrap_content"
-        android:text="Cancel" />
+            <EditText
+                android:id="@+id/etExper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="50 Words Only"
+                android:inputType="textMultiLine" />
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/bSave"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="106dp"
+                    android:layout_height="wrap_content"
+                    android:text="Save" />
+
+                <Button
+                    android:id="@+id/bCancel"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel" />
+            </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
