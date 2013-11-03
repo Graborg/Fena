@@ -67,31 +67,18 @@ public class MainActivity extends SlidingFragmentActivity implements
 					int position, long id) {
 				final String item = (String) parent.getItemAtPosition(position);
 				if (position == 1) {
-<<<<<<< HEAD
 
-=======
->>>>>>> f8444c16c1b2dbc19b91528c88c7cab557731f62
 					String url = "http://81.88.14.44:3000/people";
 					JsonPersonreceiver callbackservice = new JsonPersonreceiver(
 							MainActivity.this) {
 						@Override
 						public void receiveData(Object object) {
-<<<<<<< HEAD
-							   ArrayList<Person> persons = (ArrayList<Person>) object;
-                               MainActivity.this
-                                               .showRecordsFromJson(persons);
-						}
-					};
-					callbackservice.execute(url, null, null);
-=======
 							ArrayList<Person> persons = (ArrayList<Person>) object;
 							MainActivity.this
 									.showRecordsFromJson(persons);
 						}
 					};
 					callbackservice.execute(url, null, null);
-
->>>>>>> f8444c16c1b2dbc19b91528c88c7cab557731f62
 					/*
 					 * try { JSONArray jsonArray = new JSONArray(posts);
 					 * Log.i(HttpParser.class.getName(), "Number of entries " +
