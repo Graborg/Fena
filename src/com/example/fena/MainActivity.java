@@ -5,15 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.InputFilter.LengthFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -26,13 +31,15 @@ import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity implements ActionBar.TabListener {
+public class MainActivity extends SlidingFragmentActivity implements
+		ActionBar.TabListener {
 	SectionsPagerAdapter mSectionsPagerAdapter;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,22 +55,48 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.T
 		final ArrayList<String> list = new ArrayList<String>();
 		list.add("Profile");
 		list.add("Misc");
-		
-	    final StableArrayAdapter adapter = new StableArrayAdapter(this,
-	            R.layout.sliding_list_item, list);
-	    listview.setAdapter(adapter);
-	    
-	    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-	        @Override
-	        public void onItemClick(AdapterView<?> parent, final View view,
-	            int position, long id) {
-	          final String item = (String) parent.getItemAtPosition(position);
-	          Toast.makeText(getApplicationContext(), "Clicked"+position, Toast.LENGTH_LONG)
-	          .show();
-	        }
+		final StableArrayAdapter adapter = new StableArrayAdapter(this,
+				R.layout.sliding_list_item, list);
+		listview.setAdapter(adapter);
 
-	      });
+		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, final View view,
+					int position, long id) {
+				final String item = (String) parent.getItemAtPosition(position);
+				if (position == 1) {
+					String url = "http://81.88.14.44:3000/people";
+					JsonPersonreceiver callbackservice = new JsonPersonreceiver(
+							MainActivity.this) {
+						@Override
+						public void receiveData(Object object) {
+							ArrayList<Person> persons = (ArrayList<Person>) object;
+							MainActivity.this
+									.showRecordsFromJson(persons);
+						}
+					};
+					callbackservice.execute(url, null, null);
+
+					/*
+					 * try { JSONArray jsonArray = new JSONArray(posts);
+					 * Log.i(HttpParser.class.getName(), "Number of entries " +
+					 * jsonArray.length()); for (int i = 0; i <
+					 * jsonArray.length(); i++) { JSONObject jsonObject =
+					 * jsonArray.getJSONObject(i);
+					 * Log.i(HttpParser.class.getName(),
+					 * jsonObject.getString("text")); } } catch (Exception e) {
+					 * e.printStackTrace(); }
+					 * 
+					 * System.out.println(hp.readPosts());
+					 */
+				} else
+					Toast.makeText(getApplicationContext(),
+							"Clicked" + position, Toast.LENGTH_LONG).show();
+			}
+
+		});
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -77,12 +110,12 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.T
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
 		mViewPager
-		.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				actionBar.setSelectedNavigationItem(position);
-			}
-		});
+				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						actionBar.setSelectedNavigationItem(position);
+					}
+				});
 
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -93,6 +126,12 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.T
 			actionBar.addTab(actionBar.newTab()
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
+		}
+	}
+
+	protected void showRecordsFromJson(ArrayList<Person> jsonRecordsData) {
+		for(int i = 0; i< 3; i++){
+			Toast.makeText(getApplicationContext(), jsonRecordsData.get(i).getName(), Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -191,30 +230,28 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.T
 		}
 	}
 
-	  private class StableArrayAdapter extends ArrayAdapter<String> {
+	private class StableArrayAdapter extends ArrayAdapter<String> {
 
-		    HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+		HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
-		    public StableArrayAdapter(Context context, int textViewResourceId,
-		        List<String> objects) {
-		      super(context, textViewResourceId, objects);
-		      for (int i = 0; i < objects.size(); ++i) {
-		        mIdMap.put(objects.get(i), i);
-		      }
-		    }
+		public StableArrayAdapter(Context context, int textViewResourceId,
+				List<String> objects) {
+			super(context, textViewResourceId, objects);
+			for (int i = 0; i < objects.size(); ++i) {
+				mIdMap.put(objects.get(i), i);
+			}
+		}
 
-		    @Override
-		    public long getItemId(int position) {
-		      String item = getItem(position);
-		      return mIdMap.get(item);
-		    }
+		@Override
+		public long getItemId(int position) {
+			String item = getItem(position);
+			return mIdMap.get(item);
+		}
 
-		    @Override
-		    public boolean hasStableIds() {
-		      return true;
-		    }
+		@Override
+		public boolean hasStableIds() {
+			return true;
 
-		  }
-
+		}
+	}
 }
-
