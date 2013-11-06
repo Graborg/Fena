@@ -2,9 +2,11 @@ package com.example.fena;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,16 +21,17 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
-public abstract class JsonPersonreceiver extends AsyncTask<String, String, ArrayList<Person>> implements CallbackReceiver {
+public abstract class JsonPersonreceiver extends
+		AsyncTask<String, String, ArrayList<Person>> implements
+		CallbackReceiver {
 	private ProgressDialog mProgressDialog;
 	Handler handler;
 	Runnable callback;
 	Activity activity;
 
-	
-	
-	public JsonPersonreceiver(Activity activity){
+	public JsonPersonreceiver(Activity activity) {
 		this.activity = activity;
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage("Loading Please Wait.");
@@ -37,20 +40,29 @@ public abstract class JsonPersonreceiver extends AsyncTask<String, String, Array
 		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		mProgressDialog.setCancelable(true);
 	}
+
 	protected void onPreExecute() {
 		mProgressDialog = ProgressDialog.show(activity, "", "Please Wait",
 				true, false);
 		super.onPreExecute();
 	}
+
 	@Override
 	protected ArrayList<Person> doInBackground(String... url) {
-		//InputStream source = retrieveStream(url);
-		//Reader reader = new InputStreamReader(source);
+		InputStream source = retrieveStream(url[0]);
+		Reader reader = new InputStreamReader(source);
 		Gson gson = new Gson();
-		String s = "{\"1\":[{\"name\":\"Micke\",\"expectations\":\"\",\"skills\":\"\",\"description\":\"\",\"experience\":\"\"}],\"2\":[{\"name\":\"Micke\",\"expectations\":\"\",\"skills\":\"\",\"description\":\"\",\"experience\":\"\"}],\"3\":[{\"name\":\"Micke\",\"expectations\":\"None\",\"skills\":\"Many\",\"description\":\"Yes I want to want\",\"experience\":\"From everywhere\"}]}";
-		Reader reader = new StringReader(s);
-		PersonResults results = gson.fromJson(reader, PersonResults.class);
-		return results.persons;
+		JsonReader jreader = new JsonReader(reader);
+		jreader.setLenient(true);
+		PersonResults results = null ;
+		try {
+			results = gson.fromJson(jreader, PersonResults.class);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return (ArrayList<Person>) results.persons;
+
 	}
 
 	protected void onPostExecute(ArrayList<Person> persons) {
@@ -90,15 +102,7 @@ public abstract class JsonPersonreceiver extends AsyncTask<String, String, Array
 		return null;
 
 	}
-	
-	protected void onPostExecute(String jsondata) {
-		if (mProgressDialog != null || mProgressDialog.isShowing()) {
-			mProgressDialog.dismiss();
-		}
-		if (jsondata != null) {
-			receiveData(jsondata);
-		}
-	}
+
 
 	public abstract void receiveData(Object object);
 

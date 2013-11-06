@@ -68,29 +68,16 @@ public class MainActivity extends SlidingFragmentActivity implements
 				final String item = (String) parent.getItemAtPosition(position);
 				if (position == 1) {
 
-					String url = "http://81.88.14.44:3000/people";
+					String url = "http://31.208.72.233:3000/persons/";
 					JsonPersonreceiver callbackservice = new JsonPersonreceiver(
 							MainActivity.this) {
 						@Override
 						public void receiveData(Object object) {
 							ArrayList<Person> persons = (ArrayList<Person>) object;
-							MainActivity.this
-									.showRecordsFromJson(persons);
+							MainActivity.this.showRecordsFromJson(persons);
 						}
 					};
-					callbackservice.execute(url, null, null);
-					/*
-					 * try { JSONArray jsonArray = new JSONArray(posts);
-					 * Log.i(HttpParser.class.getName(), "Number of entries " +
-					 * jsonArray.length()); for (int i = 0; i <
-					 * jsonArray.length(); i++) { JSONObject jsonObject =
-					 * jsonArray.getJSONObject(i);
-					 * Log.i(HttpParser.class.getName(),
-					 * jsonObject.getString("text")); } } catch (Exception e) {
-					 * e.printStackTrace(); }
-					 * 
-					 * System.out.println(hp.readPosts());
-					 */
+						callbackservice.execute(url, null, null);
 				} else
 					Toast.makeText(getApplicationContext(),
 							"Clicked" + position, Toast.LENGTH_LONG).show();
@@ -130,8 +117,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 	}
 
 	protected void showRecordsFromJson(ArrayList<Person> jsonRecordsData) {
-		for(int i = 0; i< 3; i++){
-			Toast.makeText(getApplicationContext(), jsonRecordsData.get(i).getName(), Toast.LENGTH_LONG).show();
+		for (Person p: jsonRecordsData) {
+			Toast.makeText(getApplicationContext(),
+					p.getName(), Toast.LENGTH_LONG).show();
 		}
 	}
 
