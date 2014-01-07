@@ -14,6 +14,9 @@ public class Profile extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile);
 		
+		MainActivity ma = new MainActivity();
+		ma.persons.get(0).getId();
+		
 		final TextView name = (TextView) findViewById(R.id.tvName);
 		final TextView email = (TextView) findViewById(R.id.tvEmail);
 		final TextView occupation = (TextView) findViewById(R.id.tvOccupation);

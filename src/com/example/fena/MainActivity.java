@@ -34,6 +34,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	ArrayList<Person> persons;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -130,6 +131,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	}
 
 	protected void showRecordsFromJson(ArrayList<Person> jsonRecordsData) {
+		this.persons = jsonRecordsData;
 		for(int i = 0; i< 3; i++){
 			Toast.makeText(getApplicationContext(), jsonRecordsData.get(i).getName(), Toast.LENGTH_LONG).show();
 		}

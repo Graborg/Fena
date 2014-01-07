@@ -90,15 +90,6 @@ public abstract class JsonPersonreceiver extends AsyncTask<String, String, Array
 		return null;
 
 	}
-	
-	protected void onPostExecute(String jsondata) {
-		if (mProgressDialog != null || mProgressDialog.isShowing()) {
-			mProgressDialog.dismiss();
-		}
-		if (jsondata != null) {
-			receiveData(jsondata);
-		}
-	}
 
 	public abstract void receiveData(Object object);
 
