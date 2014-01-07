@@ -1,69 +1,77 @@
 package com.example.fena;
+
 import com.google.gson.annotations.Expose;
 
 import com.google.gson.annotations.SerializedName;
 
 public class Person {
-	@Expose
-	Integer id;
-	@Expose
-	Integer userId;
-	@Expose
-	String name;
-	@Expose
-	String expectations;
-	@Expose
-	String skills; 
-	@Expose
-	String description;
-	@Expose
-	String experience;
-	@Expose
-	String created_at;
-	@Expose
-	String updated_at;
-	
-	public Integer getId(){
+	@SerializedName("id")
+	private Integer id;
+	@SerializedName("name")
+	private String name;
+	@SerializedName("userId")
+	private Integer userId;
+	@SerializedName("expectations")
+	private String expectations;
+	@SerializedName("skills")
+	private String skills;
+	@SerializedName("description")
+	private String description;
+	@SerializedName("experience")
+	private String experience;
+	@SerializedName("created_at")
+	private String created_at;
+	@SerializedName("updated_at")
+	private String updated_at;
+
+	public Integer getId() {
 		return id;
 	}
-	public Integer getUserId(){
-		return userId;
-	}
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
-	public String getExpectations(){
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public String getExpectations() {
 		return expectations;
 	}
-	public String getSkills(){
+
+	public String getSkills() {
 		return skills;
 	}
-	public String getDescription(){
+
+	public String getDescription() {
 		return description;
 	}
-	public String experience(){
+
+	public String experience() {
 		return experience;
 	}
-	
-	public void setId(Integer id){
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public void setUserId(Integer userId){
-		this.userId = userId;
-	}
-	public void setName(String name){
+	public void setName(String name) {
 		this.name = name;
 	}
-	public void SetExpectations(String expectations){
+
+	public void SetExpectations(String expectations) {
 		this.expectations = expectations;
 	}
-	public void setSkills(String skills){
+
+	public void setSkills(String skills) {
 		this.skills = skills;
 	}
-	public void setDescription(String description){
+
+	public void setDescription(String description) {
 		this.description = description;
 	}
-	public void setExperience(){
+
+	public void setExperience() {
 		this.experience = experience;
 	}
 }

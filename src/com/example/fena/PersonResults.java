@@ -1,7 +1,10 @@
 package com.example.fena;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
 
 public class PersonResults {
-	public ArrayList<Person> persons;
+	@SerializedName("persons")
+	public List<Person> persons;
 }

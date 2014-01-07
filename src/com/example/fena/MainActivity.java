@@ -8,7 +8,6 @@ import java.util.Locale;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -51,52 +50,35 @@ public class MainActivity extends SlidingFragmentActivity implements
 		final ArrayList<String> list = new ArrayList<String>();
 		list.add("Profile");
 		list.add("Misc");
-		
-	    final StableArrayAdapter adapter = new StableArrayAdapter(this,
-	            R.layout.sliding_list_item, list);
-	    listview.setAdapter(adapter);
-	    
-	    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-	        @Override
-	        public void onItemClick(AdapterView<?> parent, final View view,
-	            int position, long id) {
-	          switch(position){
-	          case 0:
-	        		Intent openMainPoint = new Intent("android.intent.action.PROFILE");
-					startActivity(openMainPoint);
-	        	  break;
-	          case 1:
-					String url = "http://81.88.14.44:3000/people";
+		final StableArrayAdapter adapter = new StableArrayAdapter(this,
+				R.layout.sliding_list_item, list);
+		listview.setAdapter(adapter);
+
+		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, final View view,
+					int position, long id) {
+				final String item = (String) parent.getItemAtPosition(position);
+				if (position == 1) {
+
+					String url = "http://31.208.72.233:3000/persons/";
 					JsonPersonreceiver callbackservice = new JsonPersonreceiver(
 							MainActivity.this) {
 						@Override
 						public void receiveData(Object object) {
 							ArrayList<Person> persons = (ArrayList<Person>) object;
-							MainActivity.this
-									.showRecordsFromJson(persons);
+							MainActivity.this.showRecordsFromJson(persons);
 						}
 					};
-					callbackservice.execute(url, null, null);
-					/*
-					 * try { JSONArray jsonArray = new JSONArray(posts);
-					 * Log.i(HttpParser.class.getName(), "Number of entries " +
-					 * jsonArray.length()); for (int i = 0; i <
-					 * jsonArray.length(); i++) { JSONObject jsonObject =
-					 * jsonArray.getJSONObject(i);
-					 * Log.i(HttpParser.class.getName(),
-					 * jsonObject.getString("text")); } } catch (Exception e) {
-					 * e.printStackTrace(); }
-					 * 
-					 * System.out.println(hp.readPosts());
-					 */
-	        	  break;
-	          }
-	          //Toast.makeText(getApplicationContext(), "Clicked"+position, Toast.LENGTH_LONG)
-	          //.show();
-	        }
 
-	      });
+						callbackservice.execute(url, null, null);
+				} else
+					Toast.makeText(getApplicationContext(),
+							"Clicked" + position, Toast.LENGTH_LONG).show();
+			}
+		});
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -131,9 +113,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 	}
 
 	protected void showRecordsFromJson(ArrayList<Person> jsonRecordsData) {
-		this.persons = jsonRecordsData;
-		for(int i = 0; i< 3; i++){
-			Toast.makeText(getApplicationContext(), jsonRecordsData.get(i).getName(), Toast.LENGTH_LONG).show();
+		for (Person p: jsonRecordsData) {
+			Toast.makeText(getApplicationContext(),
+					p.getName(), Toast.LENGTH_LONG).show();
 		}
 	}
 
