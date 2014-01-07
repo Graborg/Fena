@@ -1,5 +1,7 @@
 package com.example.fena;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +10,13 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class Profile extends Activity{
-
+	
+	ArrayList<Person> persons;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile);
-		
-		MainActivity ma = new MainActivity();
-		ma.persons.get(0).getId();
 		
 		final TextView name = (TextView) findViewById(R.id.tvName);
 		final TextView email = (TextView) findViewById(R.id.tvEmail);
@@ -25,6 +26,9 @@ public class Profile extends Activity{
 		final TextView description3 = (TextView) findViewById(R.id.tvDescription3);
 		final TextView experience = (TextView) findViewById(R.id.tvExperience1);
 		
+		//String persName = MainActivity.persons.get(0).getName();
+		//System.out.println(MainActivity.persons.get(2).getName());
+		//name.setText(persName);
 	}
 	
 	@Override
@@ -49,7 +53,6 @@ public class Profile extends Activity{
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-	
 	
 
 }
