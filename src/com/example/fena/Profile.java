@@ -26,6 +26,8 @@ public class Profile extends Activity{
 		final TextView description3 = (TextView) findViewById(R.id.tvDescription3);
 		final TextView experience = (TextView) findViewById(R.id.tvExperience1);
 		
+		PersonResults pr = new PersonResults();
+		System.out.println(pr.persons.get(0).getName());
 		//String persName = MainActivity.persons.get(0).getName();
 		//System.out.println(MainActivity.persons.get(2).getName());
 		//name.setText(persName);
