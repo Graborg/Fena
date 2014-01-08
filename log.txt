@@ -1,0 +1,2 @@
+07-01-2014: Började kolla på hur man ska göra med slidingmenu och testade även servern. Fick serven att fungera men kunde inte föra över det i mitt program då det blev null, och problemet kvarstår.
+08-01-2014: Började med att uppdatera SDK till version 19. Det skapade problem och jag fick inte igång AVD, försökte då uppdatera den och testade lite andra saker men ingen lycka.
