@@ -41,7 +41,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		//actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_main);
 		setBehindContentView(R.layout.slidingmenu);
@@ -96,28 +96,28 @@ public class MainActivity extends SlidingFragmentActivity implements
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
-		// When swiping between different sections, select the corresponding
-		// tab. We can also use ActionBar.Tab#select() to do this if we have
-		// a reference to the Tab.
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
-
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
-			
-		}
+//		// When swiping between different sections, select the corresponding
+//		// tab. We can also use ActionBar.Tab#select() to do this if we have
+//		// a reference to the Tab.
+//		mViewPager
+//				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//					@Override
+//					public void onPageSelected(int position) {
+//						actionBar.setSelectedNavigationItem(position);
+//					}
+//				});
+//
+//		// For each of the sections in the app, add a tab to the action bar.
+//		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+//			// Create a tab with text corresponding to the page title defined by
+//			// the adapter. Also specify this Activity object, which implements
+//			// the TabListener interface, as the callback (listener) for when
+//			// this tab is selected.
+//			actionBar.addTab(actionBar.newTab()
+//					.setText(mSectionsPagerAdapter.getPageTitle(i))
+//					.setTabListener(this));
+//			
+//		}
 	}
 
 	protected void showRecordsFromJson(ArrayList<Person> jsonRecordsData) {
