@@ -1,2 +1,4 @@
 07-01-2014: Började kolla på hur man ska göra med slidingmenu och testade även servern. Fick serven att fungera men kunde inte föra över det i mitt program då det blev null, och problemet kvarstår.
-08-01-2014: Började med att uppdatera SDK till version 19. Det skapade problem och jag fick inte igång AVD, försökte då uppdatera den och testade lite andra saker men ingen lycka.
+08-01-2014: Började med att uppdatera SDK till version 19. Det skapade problem och jag fick inte igång AVD, försökte då uppdatera den och testade lite andra saker men problemet kvarstår.
+09-01-2014: Har fixat de problem jag hade med AVD, dock inte lika bra som innan men nu fungerar det iaf. Kollade upp på slidingmenu då den har förändrats i den nya android versionen 4.4.2 och den nya fungerar men måste nog kolla upp lite till på det men blev iaf snygg design. Kollade även upp på en ny navigation drawer (sliding menu) då även den är ny, ska försöka implementera en ny.
+14-01-2014: Fixat problem med listan person från servern. Kvarstår endel jobb med att ändra namn och fixa till koden.

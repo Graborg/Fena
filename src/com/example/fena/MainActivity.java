@@ -35,7 +35,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-	ArrayList<Person> persons;
+	static ArrayList<Person> persons;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		final ArrayList<String> list = new ArrayList<String>();
 		list.add("Profile");
 		list.add("Misc");
-
+	
 		final StableArrayAdapter adapter = new StableArrayAdapter(this,
 				R.layout.sliding_list_item, list);
 		listview.setAdapter(adapter);
@@ -74,9 +74,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 					String url = "http://31.208.72.233:3000/persons/";
 					JsonPersonreceiver callbackservice = new JsonPersonreceiver(
 							MainActivity.this) {
+						@SuppressWarnings("unchecked")
 						@Override
 						public void receiveData(Object object) {
-							ArrayList<Person> persons = (ArrayList<Person>) object;
+							persons = (ArrayList<Person>) object;
 							System.out.println(persons.get(1).getName());
 							//MainActivity.this.showRecordsFromJson(persons);
 						}
