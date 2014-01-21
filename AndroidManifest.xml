@@ -50,6 +50,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+                <activity
+            android:name="com.example.fena.Test"
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.fena.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.TESTBETA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

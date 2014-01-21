@@ -16,4 +16,13 @@
     <string name="title_section2">Sökande Personer</string>
     <string name="title_section3">Företagsannonser</string>
 
+    <string-array name="planets_array">
+        <item>Start</item>
+        <item>Test</item>
+        <item>Tellus</item>
+        <item>Profile</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    
 </resources>

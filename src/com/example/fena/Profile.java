@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 public class Profile extends Activity{
 	
-	ArrayList<Person> persons;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile);
-		
+				
 		final TextView name = (TextView) findViewById(R.id.tvName);
 		final TextView email = (TextView) findViewById(R.id.tvEmail);
 		final TextView occupation = (TextView) findViewById(R.id.tvOccupation);
@@ -26,11 +25,11 @@ public class Profile extends Activity{
 		final TextView description3 = (TextView) findViewById(R.id.tvDescription3);
 		final TextView experience = (TextView) findViewById(R.id.tvExperience1);
 		
-		name.setText(MainActivity.persons.get(1).getName());
+		name.setText(Splash.persons.get(1).getName());
 		//email.setText(MainActivity.persons.get(1).getMail());
-		description1.setText(MainActivity.persons.get(1).getExpectations());
-		description2.setText(MainActivity.persons.get(1).getSkills());
-		description3.setText(MainActivity.persons.get(1).getDescription());
+		description1.setText(Splash.persons.get(1).getExpectations());
+		description2.setText(Splash.persons.get(1).getSkills());
+		description3.setText(Splash.persons.get(1).getDescription());
 	}
 	
 	@Override
