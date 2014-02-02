@@ -1,28 +1,26 @@
 package com.example.fena;
 
-import com.google.gson.annotations.Expose;
-
 import com.google.gson.annotations.SerializedName;
 
 public class Person {
 	@SerializedName("id")
-	private Integer id;
+	private int id;
 	@SerializedName("name")
 	private String name;
-	@SerializedName("userId")
-	private Integer userId;
 	@SerializedName("expectations")
 	private String expectations;
 	@SerializedName("skills")
 	private String skills;
 	@SerializedName("description")
 	private String description;
-	@SerializedName("experience")
-	private String experience;
+	@SerializedName("mail")
+	private String mail;
 	@SerializedName("created_at")
 	private String created_at;
 	@SerializedName("updated_at")
 	private String updated_at;
+	@SerializedName("account_id")
+	private int account_id;
 
 	public Integer getId() {
 		return id;
@@ -30,10 +28,6 @@ public class Person {
 
 	public String getName() {
 		return name;
-	}
-
-	public Integer getUserId() {
-		return userId;
 	}
 
 	public String getExpectations() {
@@ -48,8 +42,20 @@ public class Person {
 		return description;
 	}
 
-	public String experience() {
-		return experience;
+	public String getMail() {
+		return mail;
+	}
+	
+	public String getCreated(){
+		return created_at;
+	}
+	
+	public String getUpdated(){
+		return updated_at;
+	}
+	
+	public int getAccountId(){
+		return account_id;
 	}
 
 	public void setId(Integer id) {
@@ -69,9 +75,5 @@ public class Person {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public void setExperience() {
-		this.experience = experience;
 	}
 }

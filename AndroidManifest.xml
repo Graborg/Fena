@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +25,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.example.fena.LogIn"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.LOGIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.example.fena.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -34,7 +44,8 @@
         </activity>
         <activity
             android:name="com.example.fena.RedProfile"
-            android:label="@string/redprofile_activity" >
+            android:label="@string/redprofile_activity"
+            android:parentActivityName="com.example.fena.Profile" >
             <intent-filter>
                 <action android:name="android.intent.action.REDPROFILE" />
 
@@ -43,14 +54,15 @@
         </activity>
         <activity
             android:name="com.example.fena.Profile"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.fena.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.PROFILE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-                <activity
+        <activity
             android:name="com.example.fena.Test"
             android:label="@string/app_name"
             android:parentActivityName="com.example.fena.MainActivity" >

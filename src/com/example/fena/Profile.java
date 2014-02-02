@@ -1,35 +1,39 @@
 package com.example.fena;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 public class Profile extends Activity{
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile);
 				
-		final TextView name = (TextView) findViewById(R.id.tvName);
-		final TextView email = (TextView) findViewById(R.id.tvEmail);
-		final TextView occupation = (TextView) findViewById(R.id.tvOccupation);
-		final TextView description1 = (TextView) findViewById(R.id.tvDescription1);
-		final TextView description2 = (TextView) findViewById(R.id.tvDescription2);
-		final TextView description3 = (TextView) findViewById(R.id.tvDescription3);
-		final TextView experience = (TextView) findViewById(R.id.tvExperience1);
+		Intent intent = getIntent();
+		int position = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, 5);
+		System.out.println(position);
 		
-		name.setText(Splash.persons.get(1).getName());
-		//email.setText(MainActivity.persons.get(1).getMail());
-		description1.setText(Splash.persons.get(1).getExpectations());
-		description2.setText(Splash.persons.get(1).getSkills());
-		description3.setText(Splash.persons.get(1).getDescription());
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		TextView name = (TextView) findViewById(R.id.tvName);
+		TextView email = (TextView) findViewById(R.id.tvEmail);
+		TextView skills = (TextView) findViewById(R.id.tvskills);
+		TextView description = (TextView) findViewById(R.id.tvDescription);
+		TextView expectation = (TextView) findViewById(R.id.tvExpectation);
+		
+		name.setText(LogIn.persons.get(position).getName());
+		email.setText(LogIn.persons.get(position).getMail());
+		expectation.setText(LogIn.persons.get(position).getExpectations());
+		skills.setText(LogIn.persons.get(position).getSkills());
+		description.setText(LogIn.persons.get(position).getDescription());
+		
+
 	}
 	
 	@Override
@@ -50,10 +54,12 @@ public class Profile extends Activity{
 	            return true;
 	        case R.id.action_settings:
 	            return true;
+		    case android.R.id.home:
+		        NavUtils.navigateUpFromSameTask(this);
+		        return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-	
 
 }

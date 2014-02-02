@@ -36,14 +36,13 @@ public abstract class JsonPersonreceiver extends
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage("Loading Please Wait.");
 		mProgressDialog.setIndeterminate(false);
-		mProgressDialog.setMax(100);
+		mProgressDialog.setMax(50);
 		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		mProgressDialog.setCancelable(true);
 	}
 
 	protected void onPreExecute() {
-		mProgressDialog = ProgressDialog.show(activity, "", "Please Wait",
-				true, false);
+		mProgressDialog = ProgressDialog.show(activity, "", "Please Wait", true, true);
 		super.onPreExecute();
 	}
 
