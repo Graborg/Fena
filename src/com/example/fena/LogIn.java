@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class LogIn extends Activity {
 	
 	static ArrayList<Person> persons;
+	static ArrayList<Project> projects;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,19 @@ public class LogIn extends Activity {
 
 		callbackservice.execute(url, null, null);
 		
+		String url2 = "http://31.208.72.233:3000/projects/";
+		JsonProjectreceiver callbackservice2 = new JsonProjectreceiver(
+				LogIn.this) {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void receiveData(Object object) {
+				projects = (ArrayList<Project>) object;
+			}
+		};
+		
+		callbackservice2.execute(url2, null, null);
+		
+		
 		TextView tvLogIn = (TextView) findViewById(R.id.tvlogin);
 		tvLogIn.setOnClickListener(new View.OnClickListener() {
 			
@@ -46,6 +60,9 @@ public class LogIn extends Activity {
 				
 			}
 		});
+		
+		
+		
 
 	}
 }

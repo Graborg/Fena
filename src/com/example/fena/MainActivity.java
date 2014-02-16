@@ -56,8 +56,6 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-
-
 		mTitle = mDrawerTitle = getTitle();
 		mPlanetTitles = getResources().getStringArray(R.array.planets_array);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -320,7 +318,28 @@ public class MainActivity extends FragmentActivity {
 			      	
 	}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-				rootView = inflater.inflate(R.layout.profile, container, false);
+				rootView = inflater.inflate(R.layout.project, container,
+						false);
+				rootView = inflater.inflate(R.layout.list_main, container, false);
+
+			    final ListView listview2 = (ListView) rootView.findViewById(R.id.listview);
+
+			    final ProjectArrayAdapter adapter2 = new ProjectArrayAdapter(getActivity().getApplicationContext(),
+			        android.R.layout.simple_list_item_1, LogIn.projects);
+			    listview2.setAdapter(adapter2);
+
+			    listview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			    	  @Override
+			    	  public void onItemClick(AdapterView<?> parent, View view,
+			    	    int position, long id) {
+			    		  System.out.println(position);
+							Intent openMainPoint = new Intent("android.intent.action.PROJECT");
+							openMainPoint.putExtra(EXTRA_MESSAGE, position);
+							startActivity(openMainPoint);
+			    		  
+			    	  }
+			    	}); 
 
 			}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
@@ -354,6 +373,43 @@ public class MainActivity extends FragmentActivity {
 			TextView secondLine = (TextView) rowView.findViewById(R.id.secondLine);
 			secondLine.setText(persons.get(position).getMail());
 			String[] day = persons.get(position).getUpdated().split("T");
+			String[] time = day[1].split("\\.");
+			TextView date = (TextView) rowView.findViewById(R.id.date);
+			date.setText(day[0] + "\n" + time[0]);
+			return rowView;
+		}
+
+
+		@Override
+		public boolean hasStableIds() {
+			return true;
+		}
+
+	}
+	
+	static class ProjectArrayAdapter extends ArrayAdapter<Project> {
+
+		Context context;
+		List<Project> projects;
+
+		public ProjectArrayAdapter(Context context, int textViewResourceId,
+				List<Project> objects) {
+			super(context, textViewResourceId, objects);
+			this.context = context;
+			projects = objects;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View rowView = inflater
+					.inflate(R.layout.list_layout, parent, false);
+			TextView label = (TextView) rowView.findViewById(R.id.label);
+			label.setText(projects.get(position).getTitle());
+			TextView secondLine = (TextView) rowView.findViewById(R.id.secondLine);
+			secondLine.setText(projects.get(position).getSubheading());
+			String[] day = projects.get(position).getUpdated().split("T");
 			String[] time = day[1].split("\\.");
 			TextView date = (TextView) rowView.findViewById(R.id.date);
 			date.setText(day[0] + "\n" + time[0]);
