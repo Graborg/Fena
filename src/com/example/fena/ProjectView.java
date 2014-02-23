@@ -18,7 +18,7 @@ public class ProjectView extends Activity{
 		setContentView(R.layout.project);
 				
 		Intent intent = getIntent();
-		int position = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, 5);
+		int position = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, -1);
 		System.out.println(position);
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -27,6 +27,7 @@ public class ProjectView extends Activity{
 		TextView subtitle = (TextView) findViewById(R.id.tvSubtitel);
 		TextView reqskills = (TextView) findViewById(R.id.tvReqskills);
 		TextView description = (TextView) findViewById(R.id.tvDescription_proj);
+		TextView gain = (TextView) findViewById(R.id.tvGains);
 		TextView time = (TextView) findViewById(R.id.tvTime);
 		TextView mail = (TextView) findViewById(R.id.tvMail_proj);
 		
@@ -35,9 +36,9 @@ public class ProjectView extends Activity{
 		subtitle.setText(LogIn.projects.get(position).getSubheading());
 		reqskills.setText(LogIn.projects.get(position).getRequested_skills());
 		description.setText(LogIn.projects.get(position).getDescription());
+		gain.setText(LogIn.projects.get(position).getGains());
 		time.setText(LogIn.projects.get(position).getTimePlan());
 		mail.setText(LogIn.projects.get(position).getMail());
-
 	}
 	
 

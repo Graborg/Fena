@@ -2,14 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
+    android:gravity="bottom"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tvlogin"
-        android:layout_width="59dp"
-        android:layout_height="42dp"
-        android:layout_gravity="right"
-        android:clickable="true" />
+    <EditText
+        android:id="@+id/eduser_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" >
+
+        <requestFocus/>
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/edpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:gravity="bottom"
+        android:inputType="textPassword" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="75dp"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/bsign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Sign Up" />
+
+        <Button
+            android:id="@+id/blogin"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Log In" />
+
+        <Button
+            android:id="@+id/bskip"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Skip" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -58,7 +58,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/tvMail"
+        android:id="@+id/tvGain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gain"
@@ -66,7 +66,7 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tvMails"
+        android:id="@+id/tvGains"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
