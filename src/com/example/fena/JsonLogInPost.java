@@ -1,18 +1,12 @@
 package com.example.fena;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -22,13 +16,11 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 		implements CallbackReceiver {
@@ -37,59 +29,65 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 	Runnable callback;
 	Activity activity;
 	private String jsonAccount;
+	final Toast toast; 
 
 	public JsonLogInPost(Activity activity, String jsonAccount) {
 		this.activity = activity;
 		this.jsonAccount = jsonAccount;
-		// mProgressDialog = new ProgressDialog(activity);
-		// mProgressDialog.setMessage("Loading Please Wait.");
-		// mProgressDialog.setIndeterminate(false);
-		// mProgressDialog.setMax(50);
-		// mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		// mProgressDialog.setCancelable(true);
+		toast = Toast.makeText(activity.getApplicationContext(), "Wrong username or password, please try again", Toast.LENGTH_LONG);
+		mProgressDialog = new ProgressDialog(activity);
+		mProgressDialog.setMessage("Loading Please Wait.");
+		mProgressDialog.setIndeterminate(false);
+		mProgressDialog.setMax(50);
+		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		mProgressDialog.setCancelable(true);
 	}
 
 	protected void onPreExecute() {
-		// mProgressDialog = ProgressDialog.show(activity, "", "Please Wait",
-		// true, true);
+		mProgressDialog = ProgressDialog.show(activity, "", "Please Wait", true, true);
 		super.onPreExecute();
 	}
 
 	@Override
 	protected Account doInBackground(String... url) {
 		String source = retrieveStream(url[0], jsonAccount);
+		if (source == null) {
+			if (mProgressDialog != null || mProgressDialog.isShowing()) {
+				mProgressDialog.dismiss();
+			}
+			toast.show();
+			return null;
+		}
 		JSONObject json = null;
 		String token = null;
 		String account_id = null;
 		try {
 			json = new JSONObject(source);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			token = json.getString("token");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			account_id = json.getString("account_id");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new Account(token,account_id);
-
+		if (mProgressDialog != null || mProgressDialog.isShowing()) {
+			mProgressDialog.dismiss();
+		}
+		activity.startActivity(new Intent("android.intent.action.MAINFENA"));
+		activity.finish();
+		return new Account(token, account_id);
 	}
 
-	protected void onPostExecute(ArrayList<Project> projects) {
-		// if (mProgressDialog != null || mProgressDialog.isShowing()) {
-		// mProgressDialog.dismiss();
-		// }
-		// if (projects != null) {
-		// receiveData(projects);
-		// }
+	protected void onPostExecute() {
+		if (mProgressDialog != null || mProgressDialog.isShowing()) {
+			mProgressDialog.dismiss();
+		}
 	}
 
 	private String retrieveStream(String url, String jsonAccount) {
@@ -109,6 +107,7 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 			if (statusCode != HttpStatus.SC_OK) {
 				Log.w(getClass().getSimpleName(), "Error " + statusCode
 						+ " for URL " + url);
+				toast.setText("Wrong username or password, please try again (" + statusCode + ")");
 				return null;
 			}
 
@@ -117,6 +116,8 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 
 		} catch (IOException e) {
 			Log.w(getClass().getSimpleName(), "Error for URL " + url, e);
+			Toast.makeText(activity.getApplicationContext(), "Internal Error",
+					Toast.LENGTH_LONG).show();
 		}
 
 		return null;

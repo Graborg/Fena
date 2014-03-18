@@ -7,7 +7,7 @@ public class Account {
 	public Account(String token, String account_id) {
 	this.token = token;
 	this.account_id = account_id;
-	System.out.println("Accountclass: " + "token: " + token + "account_id: " + account_id);
+	System.out.println("Accountclass: " + "token: " + token + "\naccount_id: " + account_id);
 	}
 	public String getToken() {
 		return token;
@@ -15,6 +15,5 @@ public class Account {
 	public String getAccountID() {
 		return account_id;
 	}
-	
 
 }

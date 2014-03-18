@@ -1,14 +1,13 @@
 package com.example.fena;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -36,6 +35,23 @@ public class LogIn extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
+
+
+		TextView tvConnection = (TextView) findViewById(R.id.tvConnection);
+		tvConnection.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Averia Sans Libre Regular.ttf"));
+		TextView tvBoard = (TextView) findViewById(R.id.tvBoard);
+		tvBoard.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Averia Sans Libre Regular.ttf"));
+		Button bskip = (Button) findViewById(R.id.bskip);
+		bskip.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		Button bsignup = (Button) findViewById(R.id.bsign_up);
+		bsignup.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		Button blogin = (Button) findViewById(R.id.blogin);
+		blogin.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		final EditText eduserName = (EditText) findViewById(R.id.eduser_name);
+		eduserName.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		final EditText edpassword = (EditText) findViewById(R.id.edpassword);
+		edpassword.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		
 		String url = "http://31.208.72.233:3000/persons/";
 		JsonPersonreceiver callbackservice = new JsonPersonreceiver(
 				LogIn.this) {
@@ -60,11 +76,7 @@ public class LogIn extends Activity {
 		
 		callbackservice2.execute(url2, null, null);
 		
-		Button bskip = (Button) findViewById(R.id.bskip);
-		Button bsignup = (Button) findViewById(R.id.bsign_up);
-		Button blogin = (Button) findViewById(R.id.blogin);
-		final EditText eduserName = (EditText) findViewById(R.id.eduser_name);
-		final EditText edpassword = (EditText) findViewById(R.id.edpassword);
+
 		
 		bskip.setOnClickListener(new View.OnClickListener() {
 			
@@ -100,6 +112,7 @@ public class LogIn extends Activity {
 					@Override
 					public void receiveData(Object object) {
 						account = (Account) object;
+
 					}
 				};
 				callbackservice3.execute(url3, null, null);
@@ -134,7 +147,6 @@ public class LogIn extends Activity {
 				};
 				callbackservice3.execute(url3, null, null);
 			}				
-			
 		});
 
 	}
