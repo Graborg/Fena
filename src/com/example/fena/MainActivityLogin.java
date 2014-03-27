@@ -1,16 +1,14 @@
 package com.example.fena;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.app.FragmentTransaction;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -28,23 +26,21 @@ import android.view.ViewGroup;
 import android.view.MenuInflater;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivityLogin extends FragmentActivity {
 
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
+
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mDrawerTitles;
 	static Activity activity;
-
 	SectionsPagerAdapter mSectionsPagerAdapter;
 
 	/**
@@ -56,10 +52,10 @@ public class MainActivity extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		activity = MainActivity.this;
-
+		activity = MainActivityLogin.this;
 		mTitle = mDrawerTitle = getTitle();
-		mDrawerTitles = getResources().getStringArray(R.array.drawer_array);
+		mDrawerTitles = getResources()
+				.getStringArray(R.array.drawerlogin_array);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -214,13 +210,50 @@ public class MainActivity extends FragmentActivity {
 				return rootView;
 			}
 			if (i == 1) {
+				Person person = LogIn.account.getMyProfile();
+				if(person == null){
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							getActivity());
+					builder.setMessage("It seems that you don't have a profile?")
+					.setPositiveButton("Create",
+							new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int id) {
+							Intent openMainPoint = new Intent("android.intent.action.CREATEMYPROFILE");
+							startActivity(openMainPoint);
+						}
+					})
+					.setNegativeButton("Cancel",
+							new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int id) {
+							//do not create
+						}
+					}).show();
+				}
+				else{
+					Intent openMainPoint = new Intent(
+							"android.intent.action.MYPROFILE");
+					startActivity(openMainPoint);
+				}
+				rootView = null;
+				return rootView;
+			}
+			if (i == 2) {
+				Intent openMainPoint = new Intent(
+						"android.intent.action.PROJECT");
+				rootView = null;
+				startActivity(openMainPoint);
+				return rootView;
+			}
+			if (i == 3) {
 				Intent openMainPoint = new Intent("android.intent.action.LOGIN");
 				rootView = null;
 				startActivity(openMainPoint);
 				activity.finish();
 				return rootView;
 			}
-			rootView = null;
+			rootView = inflater.inflate(R.layout.earth, container, false);
 			return rootView;
 		}
 	}

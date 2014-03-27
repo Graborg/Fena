@@ -1,13 +1,12 @@
 package com.example.fena;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -16,25 +15,27 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
+public abstract class JsonPut extends AsyncTask<String, String, Integer>
 		implements CallbackReceiver {
 	private ProgressDialog mProgressDialog;
 	Handler handler;
 	Runnable callback;
 	Activity activity;
-	private String jsonAccount;
-	final Toast toast; 
+	private String jsonProfile;
+	private String token;
+	final Toast toast;
 
-	public JsonLogInPost(Activity activity, String jsonAccount) {
+	public JsonPut(Activity activity, String jsonProfile, String token) {
+		this.token = token;
 		this.activity = activity;
-		this.jsonAccount = jsonAccount;
-		toast = Toast.makeText(activity.getApplicationContext(), "Wrong username or password, please try again", Toast.LENGTH_LONG);
+		this.jsonProfile = jsonProfile;
+		toast = Toast.makeText(activity.getApplicationContext(),
+				"Connection Error", Toast.LENGTH_LONG);
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage("Loading Please Wait.");
 		mProgressDialog.setIndeterminate(false);
@@ -44,13 +45,14 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 	}
 
 	protected void onPreExecute() {
-		mProgressDialog = ProgressDialog.show(activity, "", "Please Wait", true, true);
+		mProgressDialog = ProgressDialog.show(activity, "", "Please Wait",
+				true, true);
 		super.onPreExecute();
 	}
 
 	@Override
-	protected Account doInBackground(String... url) {
-		String source = retrieveStream(url[0], jsonAccount);
+	protected Integer doInBackground(String... url) {
+		String source = retrieveStream(url[0], jsonProfile, token);
 		if (source == null) {
 			if (mProgressDialog != null || mProgressDialog.isShowing()) {
 				mProgressDialog.dismiss();
@@ -58,51 +60,49 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 			toast.show();
 			return null;
 		}
+		toast.setText("Update Successful");
+		toast.show();
+		System.out.println("JsonProfilePut:" + source);
 		JSONObject json = null;
-		String token = null;
-		String account_id = null;
+		String profile_id = null;
 		try {
 			json = new JSONObject(source);
-			token = json.getString("token");
-			account_id = json.getString("account_id");
+			profile_id = json.getString("id");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		if (mProgressDialog != null || mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
-		activity.startActivity(new Intent("android.intent.action.MAINFENALOGIN"));
 		activity.finish();
-		return new Account(token, account_id);
+		return Integer.parseInt(profile_id);
 	}
 
 	protected void onPostExecute(Account account) {
 		if (mProgressDialog != null || mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
-			if (account != null) {
-				receiveData(account);
-			}
+		if (account != null) {
+			receiveData(account);
 		}
+	}
 
-	private String retrieveStream(String url, String jsonAccount) {
+	private String retrieveStream(String url, String jsonProfile, String token) {
 
 		HttpClient client = new DefaultHttpClient();
-
-		HttpPost httpPost = new HttpPost(url);
+		HttpPut httpPut = new HttpPut(url);
 
 		try {
-			StringEntity entity = new StringEntity(jsonAccount, "UTF8");
-			httpPost.setEntity(entity);
-			httpPost.setHeader("Content-type", "application/json");
-			HttpResponse response = client.execute(httpPost);
+			StringEntity entity = new StringEntity(jsonProfile, "UTF8");
+			httpPut.setEntity(entity);
+			httpPut.setHeader("Content-type", "application/json");
+			httpPut.addHeader("Authorization", "Token token=\"" + token + "\"");
+			HttpResponse response = client.execute(httpPut);
 			final int statusCode = response.getStatusLine().getStatusCode();
-			System.out.println(statusCode);
-
 			if (statusCode != HttpStatus.SC_OK) {
 				Log.w(getClass().getSimpleName(), "Error " + statusCode
 						+ " for URL " + url);
-				toast.setText("Wrong username or password, please try again (" + statusCode + ")");
+				toast.setText("Connection error (" + statusCode + ")");
 				return null;
 			}
 

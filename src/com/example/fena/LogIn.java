@@ -34,23 +34,21 @@ public class LogIn extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
-		
-
 
 		TextView tvConnection = (TextView) findViewById(R.id.tvConnection);
 		tvConnection.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Averia Sans Libre Regular.ttf"));
 		TextView tvBoard = (TextView) findViewById(R.id.tvBoard);
 		tvBoard.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Averia Sans Libre Regular.ttf"));
 		Button bskip = (Button) findViewById(R.id.bskip);
-		bskip.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		bskip.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		Button bsignup = (Button) findViewById(R.id.bsign_up);
-		bsignup.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		bsignup.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		Button blogin = (Button) findViewById(R.id.blogin);
-		blogin.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		blogin.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		final EditText eduserName = (EditText) findViewById(R.id.eduser_name);
-		eduserName.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		eduserName.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		final EditText edpassword = (EditText) findViewById(R.id.edpassword);
-		edpassword.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/RobotoCondensed-Regular.ttf"));
+		edpassword.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		
 		String url = "http://31.208.72.233:3000/persons/";
 		JsonPersonreceiver callbackservice = new JsonPersonreceiver(
