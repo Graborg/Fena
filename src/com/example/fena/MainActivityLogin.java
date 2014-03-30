@@ -170,8 +170,8 @@ public class MainActivityLogin extends FragmentActivity {
 
 	@Override
 	public void setTitle(CharSequence title) {
-		mTitle = title;
-		getActionBar().setTitle(mTitle);
+		//mTitle = title;
+		//getActionBar().setTitle(mTitle);
 	}
 
 	@Override
@@ -241,7 +241,7 @@ public class MainActivityLogin extends FragmentActivity {
 			}
 			if (i == 2) {
 				Intent openMainPoint = new Intent(
-						"android.intent.action.PROJECT");
+						"android.intent.action.MYPROJECTS");
 				rootView = null;
 				startActivity(openMainPoint);
 				return rootView;

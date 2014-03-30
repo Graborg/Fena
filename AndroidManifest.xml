@@ -74,7 +74,6 @@
         <activity
             android:name="com.example.fena.ProjectView"
             android:label="@string/app_name"
-            
             android:parentActivityName="com.example.fena.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.PROJECT" />
@@ -84,17 +83,16 @@
         </activity>
         <activity
             android:name="com.example.fena.EditProject"
-            android:label="@string/app_name"
-            android:parentActivityName="com.example.fena.ProjectView" >
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.REDPROJECT" />
+                <action android:name="android.intent.action.EDITPROJECT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.fena.MyProfile"
-            android:label="@string/app_name" 
+            android:label="@string/app_name"
             android:parentActivityName="com.example.fena.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MYPROFILE" />
@@ -102,11 +100,39 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-               <activity
+        <activity
             android:name="com.example.fena.CreateMyProfile"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATEMYPROFILE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.fena.MyProjects"
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.fena.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MYPROJECTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.fena.CreateProject"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.CREATEPROJECT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.fena.MyProject"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MYPROJECT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

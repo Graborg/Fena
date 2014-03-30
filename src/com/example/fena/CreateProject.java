@@ -4,26 +4,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class EditProject extends Activity {
-
+public class CreateProject extends Activity{
+	private int project_id;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_project);
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
-
-		Intent intent = getIntent();
-		int position = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, 0);
-
-		final Project project = LogIn.account.getMyProjects().get(position);
-
+		
 		Button save = (Button) findViewById(R.id.bSave);
 		save.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
@@ -52,13 +45,6 @@ public class EditProject extends Activity {
 		mail.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 
-		title.setText(project.getTitle());
-		subtitle.setText(project.getSubheading());
-		description.setText(project.getDescription());
-		skills.setText(project.getRequested_skills());
-		time.setText(project.getTimePlan());
-		gains.setText(project.getGains());
-
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -84,20 +70,17 @@ public class EditProject extends Activity {
 					e.printStackTrace();
 				}
 				System.out.println(jsonObj.toString());
-				System.out.println("EditProject, ID:" + project.getId());
-				String url = "http://31.208.72.233:3000/projects/"
-						+ project.getId();
-				JsonPut callbackservice3 = new JsonPut(EditProject.this,
+				String url = "http://31.208.72.233:3000/projects/";
+				JsonPost callbackservice3 = new JsonPost(CreateProject.this,
 						jsonObj.toString(), LogIn.account.getToken()) {
 					// behövs??
 					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
-						int profile_id = (Integer) object;
+						int project_id = (Integer) object;
 					}
 				};
 				callbackservice3.execute(url, null, null);
-
 			}
 		});
 

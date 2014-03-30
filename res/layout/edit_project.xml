@@ -13,56 +13,56 @@
         android:scaleType="center"
         android:src="@drawable/earth" />
 
-    <TextView
-        android:id="@+id/tvTitel"
+    <EditText
+        android:id="@+id/edTitel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0.2"
         android:background="#8a2017"
         android:gravity="center"
-        android:text="Project"
+        android:hint="Project"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#fcfaf0"
         android:textSize="35sp" />
 
-    <TextView
-        android:id="@+id/tvSubtitel"
+    <EditText
+        android:id="@+id/edSubtitel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0.4"
         android:gravity="center"
-        android:text="subtitel"
+        android:hint="subtitel"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/tvDescription_proj"
+    <EditText
+        android:id="@+id/edDescription_proj"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:background="@drawable/textviewshape"
+        android:hint="Description"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:text="Description1"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvReqskills"
+    <EditText
+        android:id="@+id/edReqskills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:background="@drawable/textviewshape"
+        android:hint="Goals"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:text="Goals"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvGains"
+    <EditText
+        android:id="@+id/edGains"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -71,13 +71,13 @@
         android:layout_marginTop="5dp"
         android:layout_weight="0.2"
         android:background="@drawable/textviewshape"
+        android:hint="Gain"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:text="Gain"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvTime"
+    <EditText
+        android:id="@+id/edTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -85,13 +85,13 @@
         android:layout_marginRight="5dp"
         android:layout_weight="0.2"
         android:background="@drawable/textviewshape"
+        android:hint="Time"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:text="Time"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvMail_proj"
+    <EditText
+        android:id="@+id/edMail_proj"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -99,20 +99,40 @@
         android:layout_marginRight="5dp"
         android:layout_weight="0.2"
         android:background="@drawable/textviewshape"
+        android:hint="Mail"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:text="Mail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/contact"
-        android:layout_width="115dp"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:layout_margin="10dp"
-        android:background="@drawable/buttonshape"
-        android:text="Contact"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/bSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/buttonshape"
+            android:text="Save"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/bCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/buttonshape"
+            android:text="Cancel"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+    </LinearLayout>
 
 </LinearLayout>

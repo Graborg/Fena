@@ -18,7 +18,7 @@ public class EditMyProfile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.red_profile);
+		setContentView(R.layout.edit_profile);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Person person = LogIn.account.getMyProfile();

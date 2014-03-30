@@ -6,23 +6,22 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class ProjectView extends Activity{
-
-	
+public class MyProject extends Activity{
+	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
+	private int position;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.project);
-				
-		Intent intent = getIntent();
-		int position = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, 0);
-		System.out.println(position);
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		Intent intent = getIntent();
+		position = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, 0);
+		
+		final Project project = LogIn.account.getMyProjects().get(position);
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		TextView title = (TextView) findViewById(R.id.tvTitel);
 		TextView subtitle = (TextView) findViewById(R.id.tvSubtitel);
@@ -30,44 +29,47 @@ public class ProjectView extends Activity{
 		TextView description = (TextView) findViewById(R.id.tvDescription_proj);
 		TextView gain = (TextView) findViewById(R.id.tvGains);
 		TextView time = (TextView) findViewById(R.id.tvTime);
-		TextView mail = (TextView) findViewById(R.id.tvMail_proj);
 		
 		title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		title.setText(LogIn.projects.get(position).getTitle());
+		title.setText(project.getTitle());
 		subtitle.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		subtitle.setText(LogIn.projects.get(position).getSubheading());
+		subtitle.setText(project.getSubheading());
 		reqskills.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		reqskills.setText(LogIn.projects.get(position).getRequested_skills());
+		reqskills.setText(project.getRequested_skills());
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		description.setText(LogIn.projects.get(position).getDescription());
+		description.setText(project.getDescription());
 		gain.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		gain.setText(LogIn.projects.get(position).getGains());
+		gain.setText(project.getGains());
 		time.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		time.setText(LogIn.projects.get(position).getTimePlan());
-		mail.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		time.setText(project.getTimePlan());
+		
+
 	}
 	
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		getMenuInflater().inflate(R.menu.main, menu);
-		return super.onCreateOptionsMenu(menu);
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.profile, menu);
+		return true;
 	}
-
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
+	        case R.id.action_edit:
+	        	Intent openMainPoint = new Intent("android.intent.action.EDITPROJECT");
+	        	openMainPoint.putExtra(EXTRA_MESSAGE, position);
+				startActivity(openMainPoint);
+				finish();
+	            return true;
 	        case R.id.action_settings:
 	            return true;
 		    case android.R.id.home:
-		        NavUtils.navigateUpFromSameTask(this);
+		        //NavUtils.navigateUpFromSameTask(this);
 		        return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-	
 }

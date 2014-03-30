@@ -30,8 +30,14 @@ public class Account {
 		}
 		return null;
 	}
-
+	
 	public ArrayList<Project> getMyProjects() {
-		return null;
+		ArrayList<Project> projects = new ArrayList<Project>();
+		for (Project proj: LogIn.projects){
+			if(proj.getAccountId() == account_id){
+				projects.add(proj);
+			}
+		}
+		return projects;
 	}
 }

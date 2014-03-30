@@ -174,8 +174,8 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public void setTitle(CharSequence title) {
-		mTitle = title;
-		getActionBar().setTitle(mTitle);
+		//mTitle = title;
+		//getActionBar().setTitle(mTitle);
 	}
 
 	@Override
@@ -316,7 +316,6 @@ public class MainActivity extends FragmentActivity {
 
 			}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-				rootView = inflater.inflate(R.layout.project, container, false);
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
 

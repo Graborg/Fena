@@ -16,7 +16,7 @@ public class CreateMyProfile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.red_profile);
+		setContentView(R.layout.edit_profile);
 		
 		final EditText name = (EditText) findViewById(R.id.edName);
 		name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));

@@ -13,8 +13,6 @@ public class Project {
 	private String requested_skills;
 	@SerializedName("gains")
 	private String gains;
-	@SerializedName("mail")
-	private String mail;
 	@SerializedName("description")
 	private String description;
 	@SerializedName("time_plan")
@@ -44,10 +42,6 @@ public class Project {
 
 	public String getGains() {
 		return gains;
-	}
-
-	public String getMail() {
-		return mail;
 	}
 
 	public String getDescription() {
