@@ -40,8 +40,8 @@ public class CreateMyProfile extends Activity {
 				String jsonExpectation = expectation.getText().toString();
 				String jsonSkills = skills.getText().toString();
 				String jsonDesciption = description.getText().toString();
-				Integer jsonShowProfile = 1;
-				Integer jsonImage = 0;
+				String jsonShowProfile = "1";
+				String jsonImage = "0";
 				JSONObject jsonObj = new JSONObject();
 				try {
 					jsonObj.put("name", jsonName);
@@ -54,7 +54,7 @@ public class CreateMyProfile extends Activity {
 					e.printStackTrace();
 				}
 				System.out.println(jsonObj.toString());
-				String url = "http://31.208.72.233:3000/persons";
+				String url = "http://54.191.168.116:3001/persons";
 				JsonPost callbackservice3 = new JsonPost(CreateMyProfile.this, jsonObj.toString(), LogIn.account.getToken()) {
 					//behövs ???
 					@SuppressWarnings("unchecked")

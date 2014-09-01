@@ -62,7 +62,6 @@ public abstract class JsonPut extends AsyncTask<String, String, Integer>
 		}
 		toast.setText("Update Successful");
 		toast.show();
-		System.out.println("JsonProfilePut:" + source);
 		JSONObject json = null;
 		String profile_id = null;
 		try {
@@ -82,6 +81,7 @@ public abstract class JsonPut extends AsyncTask<String, String, Integer>
 		if (mProgressDialog != null || mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
+
 		if (account != null) {
 			receiveData(account);
 		}

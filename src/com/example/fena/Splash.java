@@ -1,7 +1,6 @@
 package com.example.fena;
 
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +27,7 @@ public class Splash extends Activity {
 				} finally {
 					// open the mainactivity, with the intent name
 					Intent openMainPoint = new Intent(
-							"android.intent.action.LOGIN");
+							"android.intent.action.MAINFENA");
 					startActivity(openMainPoint);
 					finish();
 					// when splash is done it will call on this method which

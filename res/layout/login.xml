@@ -117,18 +117,6 @@
             android:textColor="#FFFFFF"
             android:textSize="25sp" />
 
-        <Button
-            android:id="@+id/bskip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:text="Skip"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp" />
-
     </LinearLayout>
 
 </LinearLayout>

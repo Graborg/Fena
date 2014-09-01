@@ -1,7 +1,10 @@
 package com.example.fena;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import com.example.fena.MainActivity.PersonArrayAdapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,7 +35,8 @@ import android.widget.TextView;
 public class MainActivityLogin extends FragmentActivity {
 
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
-
+	public static PersonArrayAdapter adapter;
+	public static ProjectArrayAdapter adapter2; 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -42,7 +46,9 @@ public class MainActivityLogin extends FragmentActivity {
 	private String[] mDrawerTitles;
 	static Activity activity;
 	SectionsPagerAdapter mSectionsPagerAdapter;
-
+	private MenuItem menuItem;
+	private Database db;
+	
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
@@ -53,6 +59,8 @@ public class MainActivityLogin extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		activity = MainActivityLogin.this;
+		db = new Database();
+		
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerTitles = getResources()
 				.getStringArray(R.array.drawerlogin_array);
@@ -107,6 +115,7 @@ public class MainActivityLogin extends FragmentActivity {
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
+		db.update(this);
 	}
 
 	@Override
@@ -136,6 +145,10 @@ public class MainActivityLogin extends FragmentActivity {
 		}
 		// Handle action buttons
 		switch (item.getItemId()) {
+		case R.id.action_refresh:
+			adapter.clear();
+			adapter2.clear();
+			db.update(this);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -201,8 +214,6 @@ public class MainActivityLogin extends FragmentActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			// View rootView = inflater.inflate(R.layout.fragment_planet,
-			// container, false);
 			int i = getArguments().getInt(ARG_INDEX_NUMBER);
 			View rootView = null;
 			if (i == 0) {
@@ -247,13 +258,12 @@ public class MainActivityLogin extends FragmentActivity {
 				return rootView;
 			}
 			if (i == 3) {
-				Intent openMainPoint = new Intent("android.intent.action.LOGIN");
+				Intent openMainPoint = new Intent("android.intent.action.MAINFENA");
 				rootView = null;
 				startActivity(openMainPoint);
 				activity.finish();
 				return rootView;
 			}
-			rootView = inflater.inflate(R.layout.earth, container, false);
 			return rootView;
 		}
 	}
@@ -323,15 +333,22 @@ public class MainActivityLogin extends FragmentActivity {
 			View rootView = inflater.inflate(R.layout.fragment_main_tab,
 					container, false);
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+				ArrayList<Person> person;
+				if(LogIn.persons == null){
+					person = new ArrayList<Person>();
+				}
+				else{
+					person = LogIn.persons;
+				}
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
 
 				final ListView listview = (ListView) rootView
 						.findViewById(R.id.listview);
 
-				final PersonArrayAdapter adapter = new PersonArrayAdapter(
+				adapter = new PersonArrayAdapter(
 						getActivity().getApplicationContext(),
-						android.R.layout.simple_list_item_1, LogIn.persons);
+						android.R.layout.simple_list_item_1, person);
 				listview.setAdapter(adapter);
 
 				listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -349,16 +366,23 @@ public class MainActivityLogin extends FragmentActivity {
 
 			}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-				rootView = inflater.inflate(R.layout.project, container, false);
+				ArrayList<Project> project;
+				if(LogIn.projects == null){
+					project = new ArrayList<Project>();
+				}
+				else{
+					project = LogIn.projects;
+				}
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
 
 				final ListView listview2 = (ListView) rootView
 						.findViewById(R.id.listview);
 
-				final ProjectArrayAdapter adapter2 = new ProjectArrayAdapter(
+				adapter2 = new ProjectArrayAdapter(
 						getActivity().getApplicationContext(),
-						android.R.layout.simple_list_item_1, LogIn.projects);
+						android.R.layout.simple_list_item_1, project);
+				
 				listview2.setAdapter(adapter2);
 
 				listview2

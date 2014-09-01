@@ -70,7 +70,7 @@ public class CreateProject extends Activity{
 					e.printStackTrace();
 				}
 				System.out.println(jsonObj.toString());
-				String url = "http://31.208.72.233:3000/projects/";
+				String url = "http://54.191.168.116:3001/projects/";
 				JsonPost callbackservice3 = new JsonPost(CreateProject.this,
 						jsonObj.toString(), LogIn.account.getToken()) {
 					// behövs??

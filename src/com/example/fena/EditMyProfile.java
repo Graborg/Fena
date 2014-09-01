@@ -60,8 +60,7 @@ public class EditMyProfile extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				System.out.println(jsonObj.toString());
-				String url = "http://31.208.72.233:3000/persons/" + LogIn.account.getMyProfile().getId();
+				String url = "http://54.191.168.116:3001/persons/" + LogIn.account.getMyProfile().getId();
 				JsonPut callbackservice3 = new JsonPut(EditMyProfile.this, jsonObj.toString(), LogIn.account.getToken()) {
 					//behövs??
 					@SuppressWarnings("unchecked")

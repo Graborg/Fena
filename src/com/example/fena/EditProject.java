@@ -85,7 +85,7 @@ public class EditProject extends Activity {
 				}
 				System.out.println(jsonObj.toString());
 				System.out.println("EditProject, ID:" + project.getId());
-				String url = "http://31.208.72.233:3000/projects/"
+				String url = "http://54.191.168.116:3001/projects/"
 						+ project.getId();
 				JsonPut callbackservice3 = new JsonPut(EditProject.this,
 						jsonObj.toString(), LogIn.account.getToken()) {

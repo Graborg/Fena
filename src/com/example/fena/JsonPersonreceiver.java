@@ -8,7 +8,6 @@ import java.io.StringReader;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -19,14 +18,13 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -37,11 +35,13 @@ public abstract class JsonPersonreceiver extends
 	Handler handler;
 	Runnable callback;
 	Activity activity;
-	final Toast toast; 
+	final Toast toast;
 
 	public JsonPersonreceiver(Activity activity) {
 		this.activity = activity;
-		toast = Toast.makeText(activity.getApplicationContext(), "Wrong username or password, please try again", Toast.LENGTH_LONG);
+		toast = Toast.makeText(activity.getApplicationContext(),
+				"Wrong username or password, please try again",
+				Toast.LENGTH_LONG);
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage("Loading Please Wait.");
 		mProgressDialog.setIndeterminate(false);
@@ -63,7 +63,7 @@ public abstract class JsonPersonreceiver extends
 			if (mProgressDialog != null || mProgressDialog.isShowing()) {
 				mProgressDialog.dismiss();
 			}
-			//toast.show();
+			// toast.show();
 			return null;
 		}
 		Reader reader = new InputStreamReader(source);
@@ -77,7 +77,6 @@ public abstract class JsonPersonreceiver extends
 			e.printStackTrace();
 		}
 		return (ArrayList<Person>) results.persons;
-
 	}
 
 	protected void onPostExecute(ArrayList<Person> persons) {
@@ -87,55 +86,50 @@ public abstract class JsonPersonreceiver extends
 		if (persons != null) {
 			receiveData(persons);
 		}
+		MainActivity.adapter.clear();
+		MainActivity.adapter.addAll(LogIn.persons);
+		MainActivity.adapter.notifyDataSetChanged();
+		if(MainActivityLogin.adapter != null){
+			MainActivityLogin.adapter.clear();
+			MainActivityLogin.adapter.addAll(LogIn.persons);
+			MainActivityLogin.adapter.notifyDataSetChanged();
+		}
 	}
 
 	private InputStream retrieveStream(String url) {
-		
 		HttpParams httpParameters = new BasicHttpParams();
 		// Set the timeout in milliseconds until a connection is established.
 		int timeoutConnection = 5000;
-		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-		// Set the default socket timeout (SO_TIMEOUT) 
+		HttpConnectionParams.setConnectionTimeout(httpParameters,
+				timeoutConnection);
+		// Set the default socket timeout (SO_TIMEOUT)
 		// in milliseconds which is the timeout for waiting for data.
 		int timeoutSocket = 5000;
 		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-
 		DefaultHttpClient client = new DefaultHttpClient(httpParameters);
-
 		HttpGet getRequest = new HttpGet(url);
-
 		try {
-
 			HttpResponse getResponse = client.execute(getRequest);
 			final int statusCode = getResponse.getStatusLine().getStatusCode();
-
 			if (statusCode != HttpStatus.SC_OK) {
 				Log.w(getClass().getSimpleName(), "Error " + statusCode
 						+ " for URL " + url);
 				return null;
 			}
-
 			HttpEntity getResponseEntity = getResponse.getEntity();
 			return getResponseEntity.getContent();
-
-		} 
-		catch(ConnectTimeoutException w){
+		} catch (ConnectTimeoutException w) {
 			System.out.println("FEL, jsonPerson, timeout");
 			return null;
-		}
-		catch(SocketTimeoutException x){
-				System.out.println("FEL, jsonPerson, timeout");
-				return null;
-		}
-		catch (IOException e) {
+		} catch (SocketTimeoutException x) {
+			System.out.println("FEL, jsonPerson, timeout");
+			return null;
+		} catch (IOException e) {
 			getRequest.abort();
 			Log.w(getClass().getSimpleName(), "Error for URL " + url, e);
 		}
-
 		return null;
-
 	}
 
 	public abstract void receiveData(Object object);
-
 }

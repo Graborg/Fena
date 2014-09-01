@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -13,6 +16,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -26,9 +30,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.MenuInflater;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +40,8 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity {
 
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
-
+	public static PersonArrayAdapter adapter;
+	public static ProjectArrayAdapter adapter2;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -44,6 +49,7 @@ public class MainActivity extends FragmentActivity {
 	private CharSequence mTitle;
 	private String[] mDrawerTitles;
 	static Activity activity;
+	private Database db;
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -57,6 +63,7 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		activity = MainActivity.this;
+		db = new Database();
 
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerTitles = getResources().getStringArray(R.array.drawer_array);
@@ -110,14 +117,16 @@ public class MainActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-
+		
+		db.update(this);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
+		// MenuInflater inflater = getMenuInflater();
+		// inflater.inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -131,6 +140,7 @@ public class MainActivity extends FragmentActivity {
 		return super.onPrepareOptionsMenu(menu);
 	}
 
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// The action bar home/up action should open or close the drawer.
@@ -140,6 +150,10 @@ public class MainActivity extends FragmentActivity {
 		}
 		// Handle action buttons
 		switch (item.getItemId()) {
+		case R.id.action_refresh:
+			adapter.clear();
+			adapter2.clear();
+			db.update(this);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -174,8 +188,8 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public void setTitle(CharSequence title) {
-		//mTitle = title;
-		//getActionBar().setTitle(mTitle);
+		// mTitle = title;
+		// getActionBar().setTitle(mTitle);
 	}
 
 	@Override
@@ -290,15 +304,22 @@ public class MainActivity extends FragmentActivity {
 			View rootView = inflater.inflate(R.layout.fragment_main_tab,
 					container, false);
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+				ArrayList<Person> person;
+				if (LogIn.persons == null) {
+					person = new ArrayList<Person>();
+				} else {
+					person = LogIn.persons;
+				}
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
 
 				final ListView listview = (ListView) rootView
 						.findViewById(R.id.listview);
 
-				final PersonArrayAdapter adapter = new PersonArrayAdapter(
-						getActivity().getApplicationContext(),
-						android.R.layout.simple_list_item_1, LogIn.persons);
+				adapter = new PersonArrayAdapter(getActivity()
+						.getApplicationContext(),
+						android.R.layout.simple_list_item_1, person);
+
 				listview.setAdapter(adapter);
 
 				listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -316,15 +337,22 @@ public class MainActivity extends FragmentActivity {
 
 			}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+				ArrayList<Project> project;
+				if (LogIn.projects == null) {
+					project = new ArrayList<Project>();
+				} else {
+					project = LogIn.projects;
+				}
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
 
 				final ListView listview2 = (ListView) rootView
 						.findViewById(R.id.listview);
 
-				final ProjectArrayAdapter adapter2 = new ProjectArrayAdapter(
-						getActivity().getApplicationContext(),
-						android.R.layout.simple_list_item_1, LogIn.projects);
+				adapter2 = new ProjectArrayAdapter(getActivity()
+						.getApplicationContext(),
+						android.R.layout.simple_list_item_1, project);
+
 				listview2.setAdapter(adapter2);
 
 				listview2
@@ -422,4 +450,5 @@ public class MainActivity extends FragmentActivity {
 		}
 
 	}
+
 }

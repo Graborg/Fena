@@ -29,8 +29,6 @@ public class ProjectView extends Activity{
 		TextView reqskills = (TextView) findViewById(R.id.tvReqskills);
 		TextView description = (TextView) findViewById(R.id.tvDescription_proj);
 		TextView gain = (TextView) findViewById(R.id.tvGains);
-		TextView time = (TextView) findViewById(R.id.tvTime);
-		TextView mail = (TextView) findViewById(R.id.tvMail_proj);
 		
 		title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		title.setText(LogIn.projects.get(position).getTitle());
@@ -41,10 +39,7 @@ public class ProjectView extends Activity{
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		description.setText(LogIn.projects.get(position).getDescription());
 		gain.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		gain.setText(LogIn.projects.get(position).getGains());
-		time.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		time.setText(LogIn.projects.get(position).getTimePlan());
-		mail.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		gain.setText("Gains\n" + LogIn.projects.get(position).getGains() +"Time\n" + LogIn.projects.get(position).getTimePlan() + "Wanted\n");
 	}
 	
 

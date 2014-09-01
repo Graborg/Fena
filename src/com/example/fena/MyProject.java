@@ -28,7 +28,6 @@ public class MyProject extends Activity{
 		TextView reqskills = (TextView) findViewById(R.id.tvReqskills);
 		TextView description = (TextView) findViewById(R.id.tvDescription_proj);
 		TextView gain = (TextView) findViewById(R.id.tvGains);
-		TextView time = (TextView) findViewById(R.id.tvTime);
 		
 		title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		title.setText(project.getTitle());
@@ -40,8 +39,6 @@ public class MyProject extends Activity{
 		description.setText(project.getDescription());
 		gain.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		gain.setText(project.getGains());
-		time.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		time.setText(project.getTimePlan());
 		
 
 	}
