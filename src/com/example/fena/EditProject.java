@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class EditProject extends Activity {
+	private Project project;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +21,13 @@ public class EditProject extends Activity {
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Intent intent = getIntent();
-		int position = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, 0);
-
-		final Project project = LogIn.account.getMyProjects().get(position);
+		int projectId = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, -1);
+		
+		for(Project pro: LogIn.projects){
+			if(pro.getId() == projectId){
+				project = pro;
+			}
+		}
 
 		Button save = (Button) findViewById(R.id.bSave);
 		save.setTypeface(Typeface.createFromAsset(getAssets(),
@@ -83,13 +88,10 @@ public class EditProject extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				System.out.println(jsonObj.toString());
-				System.out.println("EditProject, ID:" + project.getId());
 				String url = "http://54.191.168.116:3001/projects/"
 						+ project.getId();
 				JsonPut callbackservice3 = new JsonPut(EditProject.this,
 						jsonObj.toString(), LogIn.account.getToken()) {
-					// behövs??
 					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {

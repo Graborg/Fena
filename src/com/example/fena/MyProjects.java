@@ -43,7 +43,9 @@ public class MyProjects extends Activity {
 								View view, int position, long id) {
 							Intent openMainPoint = new Intent(
 									"android.intent.action.MYPROJECT");
-							openMainPoint.putExtra(EXTRA_MESSAGE, position);
+							Project project = LogIn.account.getMyProjects().get(position);
+							
+							openMainPoint.putExtra(EXTRA_MESSAGE, project.getId());
 							startActivity(openMainPoint);
 
 						}

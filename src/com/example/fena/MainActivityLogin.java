@@ -364,8 +364,7 @@ public class MainActivityLogin extends FragmentActivity {
 								Intent openMainPoint = new Intent(
 										"android.intent.action.MYPROFILE");
 								startActivity(openMainPoint);
-							}
-							else{
+							} else {
 								Intent openMainPoint = new Intent(
 										"android.intent.action.PROFILE");
 								openMainPoint.putExtra(EXTRA_MESSAGE, position);
@@ -406,11 +405,26 @@ public class MainActivityLogin extends FragmentActivity {
 							@Override
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								Intent openMainPoint = new Intent(
-										"android.intent.action.PROJECT");
-								openMainPoint.putExtra(EXTRA_MESSAGE, position);
-								startActivity(openMainPoint);
-
+								if (LogIn.account != null) {
+									Project project = LogIn.projects.get(position);
+									if (LogIn.account.getAccountID() == project.getAccountId()) {
+										Intent openMainPoint = new Intent("android.intent.action.MYPROJECT");
+										openMainPoint.putExtra(EXTRA_MESSAGE, project.getId());
+										startActivity(openMainPoint);
+									} else {
+										Intent openMainPoint = new Intent(
+												"android.intent.action.PROJECT");
+										openMainPoint.putExtra(EXTRA_MESSAGE,
+												position);
+										startActivity(openMainPoint);
+									}
+								} else {
+									Intent openMainPoint = new Intent(
+											"android.intent.action.PROJECT");
+									openMainPoint.putExtra(EXTRA_MESSAGE,
+											position);
+									startActivity(openMainPoint);
+								}
 							}
 						});
 

@@ -11,16 +11,21 @@ import android.widget.TextView;
 
 public class MyProject extends Activity{
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
-	private int position;
+	private int projectId;
+	private Project project;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.project);
 		
 		Intent intent = getIntent();
-		position = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, 0);
+		projectId = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, -1);
 		
-		final Project project = LogIn.account.getMyProjects().get(position);
+		for(Project pro: LogIn.projects){
+			if(pro.getId() == projectId){
+				project = pro;
+			}
+		}
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		TextView title = (TextView) findViewById(R.id.tvTitel);
@@ -56,7 +61,7 @@ public class MyProject extends Activity{
 	    switch (item.getItemId()) {
 	        case R.id.action_edit:
 	        	Intent openMainPoint = new Intent("android.intent.action.EDITPROJECT");
-	        	openMainPoint.putExtra(EXTRA_MESSAGE, position);
+	        	openMainPoint.putExtra(EXTRA_MESSAGE, projectId);
 				startActivity(openMainPoint);
 				finish();
 	            return true;
