@@ -17,7 +17,7 @@ public class Profile extends Activity{
 		setContentView(R.layout.profile);
 		
 		Intent intent = getIntent();
-		int position = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, 0);
+		int position = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, -1);
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		

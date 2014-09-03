@@ -10,8 +10,7 @@ public class Account {
 	public Account(String token, String account_id) {
 		this.token = token;
 		this.account_id = Integer.parseInt(account_id);
-		System.out.println("Accountclass: " + "token: " + token
-				+ "\naccount_id: " + account_id);
+		
 	}
 
 	public String getToken() {

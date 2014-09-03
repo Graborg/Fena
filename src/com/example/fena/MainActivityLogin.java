@@ -36,7 +36,7 @@ public class MainActivityLogin extends FragmentActivity {
 
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
 	public static PersonArrayAdapter adapter;
-	public static ProjectArrayAdapter adapter2; 
+	public static ProjectArrayAdapter adapter2;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -48,7 +48,7 @@ public class MainActivityLogin extends FragmentActivity {
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	private MenuItem menuItem;
 	private Database db;
-	
+
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
@@ -60,7 +60,7 @@ public class MainActivityLogin extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		activity = MainActivityLogin.this;
 		db = new Database();
-		
+
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerTitles = getResources()
 				.getStringArray(R.array.drawerlogin_array);
@@ -183,8 +183,8 @@ public class MainActivityLogin extends FragmentActivity {
 
 	@Override
 	public void setTitle(CharSequence title) {
-		//mTitle = title;
-		//getActionBar().setTitle(mTitle);
+		// mTitle = title;
+		// getActionBar().setTitle(mTitle);
 	}
 
 	@Override
@@ -222,27 +222,28 @@ public class MainActivityLogin extends FragmentActivity {
 			}
 			if (i == 1) {
 				Person person = LogIn.account.getMyProfile();
-				if(person == null){
+				if (person == null) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(
 							getActivity());
-					builder.setMessage("It seems that you don't have a profile?")
-					.setPositiveButton("Create",
-							new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int id) {
-							Intent openMainPoint = new Intent("android.intent.action.CREATEMYPROFILE");
-							startActivity(openMainPoint);
-						}
-					})
-					.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int id) {
-							//do not create
-						}
-					}).show();
-				}
-				else{
+					builder.setMessage(
+							"It seems that you don't have a profile?")
+							.setPositiveButton("Create",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+											Intent openMainPoint = new Intent(
+													"android.intent.action.CREATEMYPROFILE");
+											startActivity(openMainPoint);
+										}
+									})
+							.setNegativeButton("Cancel",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+											// do not create
+										}
+									}).show();
+				} else {
 					Intent openMainPoint = new Intent(
 							"android.intent.action.MYPROFILE");
 					startActivity(openMainPoint);
@@ -258,7 +259,8 @@ public class MainActivityLogin extends FragmentActivity {
 				return rootView;
 			}
 			if (i == 3) {
-				Intent openMainPoint = new Intent("android.intent.action.MAINFENA");
+				Intent openMainPoint = new Intent(
+						"android.intent.action.MAINFENA");
 				rootView = null;
 				startActivity(openMainPoint);
 				activity.finish();
@@ -334,10 +336,9 @@ public class MainActivityLogin extends FragmentActivity {
 					container, false);
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
 				ArrayList<Person> person;
-				if(LogIn.persons == null){
+				if (LogIn.persons == null) {
 					person = new ArrayList<Person>();
-				}
-				else{
+				} else {
 					person = LogIn.persons;
 				}
 				rootView = inflater.inflate(R.layout.list_main, container,
@@ -346,8 +347,8 @@ public class MainActivityLogin extends FragmentActivity {
 				final ListView listview = (ListView) rootView
 						.findViewById(R.id.listview);
 
-				adapter = new PersonArrayAdapter(
-						getActivity().getApplicationContext(),
+				adapter = new PersonArrayAdapter(getActivity()
+						.getApplicationContext(),
 						android.R.layout.simple_list_item_1, person);
 				listview.setAdapter(adapter);
 
@@ -356,21 +357,35 @@ public class MainActivityLogin extends FragmentActivity {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Intent openMainPoint = new Intent(
-								"android.intent.action.PROFILE");
-						openMainPoint.putExtra(EXTRA_MESSAGE, position);
-						startActivity(openMainPoint);
 
+						if (LogIn.account != null) {
+							if (LogIn.account.getAccountID() == LogIn.persons
+									.get(position).getAccountId()) {
+								Intent openMainPoint = new Intent(
+										"android.intent.action.MYPROFILE");
+								startActivity(openMainPoint);
+							}
+							else{
+								Intent openMainPoint = new Intent(
+										"android.intent.action.PROFILE");
+								openMainPoint.putExtra(EXTRA_MESSAGE, position);
+								startActivity(openMainPoint);
+							}
+						} else {
+							Intent openMainPoint = new Intent(
+									"android.intent.action.PROFILE");
+							openMainPoint.putExtra(EXTRA_MESSAGE, position);
+							startActivity(openMainPoint);
+						}
 					}
 				});
 
 			}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
 				ArrayList<Project> project;
-				if(LogIn.projects == null){
+				if (LogIn.projects == null) {
 					project = new ArrayList<Project>();
-				}
-				else{
+				} else {
 					project = LogIn.projects;
 				}
 				rootView = inflater.inflate(R.layout.list_main, container,
@@ -379,10 +394,10 @@ public class MainActivityLogin extends FragmentActivity {
 				final ListView listview2 = (ListView) rootView
 						.findViewById(R.id.listview);
 
-				adapter2 = new ProjectArrayAdapter(
-						getActivity().getApplicationContext(),
+				adapter2 = new ProjectArrayAdapter(getActivity()
+						.getApplicationContext(),
 						android.R.layout.simple_list_item_1, project);
-				
+
 				listview2.setAdapter(adapter2);
 
 				listview2
