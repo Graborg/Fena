@@ -14,7 +14,7 @@ public class MyProfile extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.profile);
+		setContentView(R.layout.myprofile);
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		

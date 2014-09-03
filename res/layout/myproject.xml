@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical" >
+    
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebe4d3"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0.2"
+        android:scaleType="center"
+        android:src="@drawable/earth" />
+
+    <TextView
+        android:id="@+id/tvTitel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.2"
+        android:background="#8a2017"
+        android:gravity="center"
+        android:text="Project"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#fcfaf0"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/tvSubtitel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.4"
+        android:gravity="center"
+        android:text="subtitel"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvDescription_proj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/textviewshape"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="Description1"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvReqskills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/textviewshape"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="Goals"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvGains"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.2"
+        android:background="@drawable/textviewshape"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="Gain\nMail\nTime"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</LinearLayout>
+</ScrollView>

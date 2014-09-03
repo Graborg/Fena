@@ -16,7 +16,7 @@ public class MyProject extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.project);
+		setContentView(R.layout.myproject);
 		
 		Intent intent = getIntent();
 		projectId = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, -1);

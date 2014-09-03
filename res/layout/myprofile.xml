@@ -79,16 +79,6 @@
         android:orientation="horizontal"
         android:padding="10dp" >
 
-        <Button
-            android:id="@+id/bContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttonshape"
-            android:padding="10dp"
-            android:text="Contact"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-
     </RelativeLayout>
 
 </LinearLayout>

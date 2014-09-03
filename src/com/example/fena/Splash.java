@@ -17,6 +17,10 @@ public class Splash extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
+		
+		LogIn.account = null;
+		LogIn.persons = null;
+		LogIn.projects = null;
 
 		Thread timer = new Thread() {
 			public void run() {
