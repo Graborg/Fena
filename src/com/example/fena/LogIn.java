@@ -71,7 +71,6 @@ public class LogIn extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				System.out.println(jsonObj.toString());
 				String url3 = "http://54.191.168.116:3001/accounts";
 
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
@@ -102,7 +101,6 @@ public class LogIn extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				System.out.println(jsonObj.toString());
 				String url3 = "http://54.191.168.116:3001/accounts/login";
 
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,

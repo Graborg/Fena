@@ -83,7 +83,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/contact"
+        android:id="@+id/bContactProj"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"

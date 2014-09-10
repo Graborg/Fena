@@ -60,7 +60,7 @@ public abstract class JsonProjectreceiver extends
 	protected ArrayList<Project> doInBackground(String... url) {
 		InputStream source = retrieveStream(url[0]);
 		if (source == null) {
-			toast.show();
+			//toast.show();
 			// activity.finish();
 			return null;
 		}
@@ -84,6 +84,9 @@ public abstract class JsonProjectreceiver extends
 		if (projects != null) {
 			receiveData(projects);
 		}
+		if(LogIn.projects == null){
+			LogIn.projects = new ArrayList<Project>();
+		}
 		MainActivity.adapter2.clear();
 		MainActivity.adapter2.addAll(LogIn.projects);
 		MainActivity.adapter2.notifyDataSetChanged();
@@ -97,12 +100,12 @@ public abstract class JsonProjectreceiver extends
 	private InputStream retrieveStream(String url) {
 		HttpParams httpParameters = new BasicHttpParams();
 		// Set the timeout in milliseconds until a connection is established.
-		int timeoutConnection = 5000;
+		int timeoutConnection = 7000;
 		HttpConnectionParams.setConnectionTimeout(httpParameters,
 				timeoutConnection);
 		// Set the default socket timeout (SO_TIMEOUT)
 		// in milliseconds which is the timeout for waiting for data.
-		int timeoutSocket = 5000;
+		int timeoutSocket = 7000;
 		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 		DefaultHttpClient client = new DefaultHttpClient(httpParameters);
 		HttpGet getRequest = new HttpGet(url);
@@ -112,14 +115,20 @@ public abstract class JsonProjectreceiver extends
 			if (statusCode != HttpStatus.SC_OK) {
 				Log.w(getClass().getSimpleName(), "Error " + statusCode
 						+ " for URL " + url);
+				toast.setText("Internal Error, Please try again later");
+				toast.show();
 				return null;
 			}
 			HttpEntity getResponseEntity = getResponse.getEntity();
 			return getResponseEntity.getContent();
 		} catch (ConnectTimeoutException w) {
-			System.out.println("FEL, jsonProject, timeout");
+			toast.setText("No Or Bad Internet Connection, Please Check The Settings And Try Again");
+			toast.show();
+			System.out.println("ConnectTimeoutException, jsonProject, timeout");
 		} catch (SocketTimeoutException x) {
-			System.out.println("FEL, jsonProject, timeout");
+			toast.setText("Internal Error, Please try again later");
+			toast.show();
+			System.out.println("SocketTimeoutException, jsonProject, timeout");
 		} catch (IOException e) {
 			getRequest.abort();
 			Log.w(getClass().getSimpleName(), "Error for URL " + url, e);

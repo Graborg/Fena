@@ -80,7 +80,7 @@
         android:padding="10dp" >
 
         <Button
-            android:id="@+id/bContact"
+            android:id="@+id/bContactProj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/buttonshape"

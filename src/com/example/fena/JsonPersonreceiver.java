@@ -19,7 +19,9 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -35,13 +37,9 @@ public abstract class JsonPersonreceiver extends
 	Handler handler;
 	Runnable callback;
 	Activity activity;
-	final Toast toast;
 
 	public JsonPersonreceiver(Activity activity) {
 		this.activity = activity;
-		toast = Toast.makeText(activity.getApplicationContext(),
-				"Wrong username or password, please try again",
-				Toast.LENGTH_LONG);
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage("Loading Please Wait.");
 		mProgressDialog.setIndeterminate(false);
@@ -63,7 +61,6 @@ public abstract class JsonPersonreceiver extends
 			if (mProgressDialog != null || mProgressDialog.isShowing()) {
 				mProgressDialog.dismiss();
 			}
-			// toast.show();
 			return null;
 		}
 		Reader reader = new InputStreamReader(source);
@@ -86,6 +83,9 @@ public abstract class JsonPersonreceiver extends
 		if (persons != null) {
 			receiveData(persons);
 		}
+		if(LogIn.persons == null){
+			LogIn.persons = new ArrayList<Person>();
+		}
 		MainActivity.adapter.clear();
 		MainActivity.adapter.addAll(LogIn.persons);
 		MainActivity.adapter.notifyDataSetChanged();
@@ -99,12 +99,12 @@ public abstract class JsonPersonreceiver extends
 	private InputStream retrieveStream(String url) {
 		HttpParams httpParameters = new BasicHttpParams();
 		// Set the timeout in milliseconds until a connection is established.
-		int timeoutConnection = 5000;
+		int timeoutConnection = 7000;
 		HttpConnectionParams.setConnectionTimeout(httpParameters,
 				timeoutConnection);
 		// Set the default socket timeout (SO_TIMEOUT)
 		// in milliseconds which is the timeout for waiting for data.
-		int timeoutSocket = 5000;
+		int timeoutSocket = 7000;
 		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 		DefaultHttpClient client = new DefaultHttpClient(httpParameters);
 		HttpGet getRequest = new HttpGet(url);
@@ -119,10 +119,10 @@ public abstract class JsonPersonreceiver extends
 			HttpEntity getResponseEntity = getResponse.getEntity();
 			return getResponseEntity.getContent();
 		} catch (ConnectTimeoutException w) {
-			System.out.println("FEL, jsonPerson, timeout");
+			System.out.println("ConnectTimeoutException, jsonPerson, timeout");
 			return null;
 		} catch (SocketTimeoutException x) {
-			System.out.println("FEL, jsonPerson, timeout");
+			System.out.println("SocketTimeoutException, jsonPerson, timeout");
 			return null;
 		} catch (IOException e) {
 			getRequest.abort();
