@@ -60,8 +60,6 @@ public abstract class JsonProjectreceiver extends
 	protected ArrayList<Project> doInBackground(String... url) {
 		InputStream source = retrieveStream(url[0]);
 		if (source == null) {
-			//toast.show();
-			// activity.finish();
 			return null;
 		}
 		Reader reader = new InputStreamReader(source);

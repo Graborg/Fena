@@ -56,7 +56,7 @@
             android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/eduser_name"
+        android:id="@+id/edmail"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_gravity="bottom"

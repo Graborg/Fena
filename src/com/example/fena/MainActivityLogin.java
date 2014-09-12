@@ -261,6 +261,7 @@ public class MainActivityLogin extends FragmentActivity {
 			if (i == 3) {
 				Intent openMainPoint = new Intent(
 						"android.intent.action.MAINFENA");
+				LogIn.account = null;
 				rootView = null;
 				startActivity(openMainPoint);
 				activity.finish();

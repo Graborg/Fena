@@ -33,7 +33,7 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 	public JsonLogInPost(Activity activity, String jsonAccount) {
 		this.activity = activity;
 		this.jsonAccount = jsonAccount;
-		toast = Toast.makeText(activity.getApplicationContext(), "Wrong username or password, please try again", Toast.LENGTH_LONG);
+		toast = Toast.makeText(activity.getApplicationContext(), "Wrong username or password\nPlease try again", Toast.LENGTH_LONG);
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage("Loading Please Wait.");
 		mProgressDialog.setIndeterminate(false);
@@ -101,7 +101,7 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 			if (statusCode != HttpStatus.SC_OK) {
 				Log.w(getClass().getSimpleName(), "Error " + statusCode
 						+ " for URL " + url);
-				toast.setText("Wrong username or password, please try again (" + statusCode + ")");
+				toast.setText("Wrong username or password\nPlease try again");
 				return null;
 			}
 

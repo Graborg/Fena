@@ -1,9 +1,6 @@
 package com.example.fena;
 
-import java.util.ArrayList;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
@@ -20,7 +17,6 @@ public class Splash extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		
-		LogIn.account = null;
 		LogIn.persons = null;
 		LogIn.projects = null;
 
@@ -31,15 +27,17 @@ public class Splash extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				} finally {
-					// open the mainactivity, with the intent name
-					Intent openMainPoint = new Intent(
-							"android.intent.action.MAINFENA");
-					startActivity(openMainPoint);
-					finish();
-					// when splash is done it will call on this method which
-					// will make the splash
-					// to call on the onPause method which with finish() will
-					// kill itself
+					if(LogIn.account != null){
+						Intent openMainPoint = new Intent("android.intent.action.MAINFENALOGIN");
+						startActivity(openMainPoint);
+						finish();
+					}
+					else{
+						Intent openMainPoint = new Intent(
+								"android.intent.action.MAINFENA");
+						startActivity(openMainPoint);
+						finish();
+					}
 				}
 			}
 		};

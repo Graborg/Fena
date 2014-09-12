@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -48,8 +50,8 @@ public class LogIn extends Activity {
 		Button blogin = (Button) findViewById(R.id.blogin);
 		blogin.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		final EditText eduserName = (EditText) findViewById(R.id.eduser_name);
-		eduserName.setTypeface(Typeface.createFromAsset(getAssets(),
+		final EditText edmail = (EditText) findViewById(R.id.edmail);
+		edmail.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 		final EditText edpassword = (EditText) findViewById(R.id.edpassword);
 		edpassword.setTypeface(Typeface.createFromAsset(getAssets(),
@@ -62,12 +64,16 @@ public class LogIn extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				String userName = eduserName.getText().toString();
+				String mail = edmail.getText().toString();
 				String password = edpassword.getText().toString();
+				if(!validEmail(mail)){
+					Toast.makeText(getApplicationContext(), "Invalid Email, Please try again", Toast.LENGTH_LONG).show();
+				}
+				else{
 				JSONObject jsonObj = new JSONObject();
 				try {
 					jsonObj.put("password", password);
-					jsonObj.put("username", userName);
+					jsonObj.put("username", mail);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -83,6 +89,7 @@ public class LogIn extends Activity {
 					}
 				};
 				callbackservice3.execute(url3, null, null);
+				}
 			}
 
 		});
@@ -91,13 +98,16 @@ public class LogIn extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				String userName = eduserName.getText().toString();
+				String mail = edmail.getText().toString();
 				String password = edpassword.getText().toString();
-
+				if(!validEmail(mail)){
+					Toast.makeText(getApplicationContext(), "Invalid Email, Please try again", Toast.LENGTH_LONG).show();
+				}
+				else{
 				JSONObject jsonObj = new JSONObject();
 				try {
 					jsonObj.put("password", password);
-					jsonObj.put("username", userName);
+					jsonObj.put("username", mail);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -113,8 +123,19 @@ public class LogIn extends Activity {
 					}
 				};
 				callbackservice3.execute(url3, null, null);
+				}
 			}
 		});
 
 	}
+
+	private boolean validEmail(String email) {
+		Pattern pattern = Patterns.EMAIL_ADDRESS;
+		return pattern.matcher(email).matches();
+	}
+	
+	public static final Pattern EMAIL_ADDRESS = Pattern
+			.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@"
+					+ "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\."
+					+ "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
 }
