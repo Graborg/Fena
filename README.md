@@ -5,5 +5,5 @@ An application to connect entrepreneurs with students to encourage ideas and rea
 
 Current Authors:
 
-Jonathan Vidmar
+Oscar Axelsson
 Mikael Gråborg

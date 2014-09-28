@@ -90,6 +90,7 @@ public class EditProject extends Activity {
 				}
 				String url = "http://54.191.168.116:3001/projects/"
 						+ project.getId();
+				System.out.println("Project id" + project.getId());
 				JsonPut callbackservice3 = new JsonPut(EditProject.this,
 						jsonObj.toString(), LogIn.account.getToken()) {
 					@SuppressWarnings("unchecked")
