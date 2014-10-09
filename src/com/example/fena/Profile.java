@@ -42,6 +42,7 @@ public class Profile extends Activity{
 		skills.setText(person.getSkills());
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		description.setText(person.getDescription());
+		contact.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		
 		contact.setOnClickListener(new View.OnClickListener() {
 			

@@ -154,6 +154,10 @@ public class MainActivity extends FragmentActivity {
 			adapter.clear();
 			adapter2.clear();
 			db.update(this);
+		case R.id.action_search:
+			return true;
+		case R.id.action_settings:
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

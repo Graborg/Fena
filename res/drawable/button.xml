@@ -8,8 +8,10 @@
                 android:startColor="@color/color_blue"
                 android:endColor="@color/color_shadowblue"
                 android:centerColor="@color/color_blue"
-                android:type="radial" 
-                android:gradientRadius="250"/>
+                android:angle="75" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/color_black" />
             <corners
                 android:radius="5dp" />
             <padding
@@ -25,7 +27,10 @@
             <gradient
                 android:endColor="@color/color_red"
                 android:startColor="@color/color_red"
-                android:angle="270" />
+                android:angle="75" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/color_black" />
             <corners
                 android:radius="5dp" />
             <padding
@@ -41,7 +46,10 @@
             <gradient
                 android:endColor="@color/color_blue"
                 android:startColor="@color/color_blue"
-                android:angle="270" />
+                android:angle="75" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/color_black" />
             <corners
                 android:radius="5dp" />
             <padding

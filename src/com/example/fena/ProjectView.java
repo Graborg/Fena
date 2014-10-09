@@ -47,6 +47,8 @@ public class ProjectView extends Activity{
 		description.setText(project.getDescription());
 		gain.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		gain.setText("Gains\n" + project.getGains() +"Time\n" + project.getTimePlan() + "Wanted\n");
+		contact.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		
 		contact.setOnClickListener(new View.OnClickListener() {
 			
