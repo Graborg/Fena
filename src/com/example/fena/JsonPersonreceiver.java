@@ -86,9 +86,11 @@ public abstract class JsonPersonreceiver extends
 		if(LogIn.persons == null){
 			LogIn.persons = new ArrayList<Person>();
 		}
+		if(MainActivity.adapter != null){
 		MainActivity.adapter.clear();
 		MainActivity.adapter.addAll(LogIn.persons);
 		MainActivity.adapter.notifyDataSetChanged();
+		}
 		if(MainActivityLogin.adapter != null){
 			MainActivityLogin.adapter.clear();
 			MainActivityLogin.adapter.addAll(LogIn.persons);

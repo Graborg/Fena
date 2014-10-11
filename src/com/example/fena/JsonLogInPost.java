@@ -29,9 +29,11 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 	Activity activity;
 	private String jsonAccount;
 	final Toast toast; 
+	private boolean keepsignin;
 
-	public JsonLogInPost(Activity activity, String jsonAccount) {
+	public JsonLogInPost(Activity activity, String jsonAccount, boolean keepsignin) {
 		this.activity = activity;
+		this.keepsignin = keepsignin;
 		this.jsonAccount = jsonAccount;
 		toast = Toast.makeText(activity.getApplicationContext(), "Wrong username or password\nPlease try again", Toast.LENGTH_LONG);
 		mProgressDialog = new ProgressDialog(activity);
@@ -72,7 +74,7 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 		}
 		activity.startActivity(new Intent("android.intent.action.MAINFENALOGIN"));
 		activity.finish();
-		return new Account(token, account_id);
+		return new Account(token, account_id, keepsignin);
 	}
 
 	protected void onPostExecute(Account account) {

@@ -72,10 +72,9 @@
                     android:id="@+id/edmail"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:layout_marginTop="20dp"
                     android:background="@drawable/textviewshape"
                     android:gravity="center"
                     android:hint="E-mail"
@@ -88,13 +87,23 @@
                     android:id="@+id/edpassword"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/textviewshape"
                     android:gravity="center"
                     android:hint="Password"
                     android:inputType="textPassword" />
+
+                <CheckBox
+                    android:id="@+id/cbkeepsignin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:text="Keep me Signed in" />
+
             </LinearLayout>
 
             <LinearLayout

@@ -13,6 +13,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -262,6 +263,9 @@ public class MainActivityLogin extends FragmentActivity {
 				Intent openMainPoint = new Intent(
 						"android.intent.action.MAINFENA");
 				LogIn.account = null;
+				Editor editor = Splash.sharedpreferences.edit();
+				editor.clear();
+				editor.commit();
 				rootView = null;
 				startActivity(openMainPoint);
 				activity.finish();

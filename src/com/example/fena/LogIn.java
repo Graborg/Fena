@@ -1,23 +1,19 @@
 package com.example.fena;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,15 +23,12 @@ public class LogIn extends Activity {
 	static ArrayList<Person> persons;
 	static ArrayList<Project> projects;
 	static Account account;
+	
+	private boolean keepsignin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-		// getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-			//	WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
@@ -51,6 +44,9 @@ public class LogIn extends Activity {
 		Button blogin = (Button) findViewById(R.id.blogin);
 		blogin.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
+		final CheckBox cbkeepsignin = (CheckBox) findViewById(R.id.cbkeepsignin);
+		cbkeepsignin.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		final EditText edmail = (EditText) findViewById(R.id.edmail);
 		edmail.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
@@ -58,8 +54,7 @@ public class LogIn extends Activity {
 		edpassword.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 	
-	
-		
+
 		bsignup.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -67,6 +62,7 @@ public class LogIn extends Activity {
 
 				String mail = edmail.getText().toString();
 				String password = edpassword.getText().toString();
+				keepsignin = cbkeepsignin.isChecked();
 				if(!validEmail(mail)){
 					Toast.makeText(getApplicationContext(), "Invalid Email, Please try again", Toast.LENGTH_LONG).show();
 				}
@@ -81,7 +77,7 @@ public class LogIn extends Activity {
 				String url3 = "http://54.191.168.116:3001/accounts";
 
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
-						jsonObj.toString()) {
+						jsonObj.toString(), keepsignin) {
 					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
@@ -101,6 +97,7 @@ public class LogIn extends Activity {
 			public void onClick(View v) {
 				String mail = edmail.getText().toString();
 				String password = edpassword.getText().toString();
+				keepsignin = cbkeepsignin.isChecked();
 				if(!validEmail(mail)){
 					Toast.makeText(getApplicationContext(), "Invalid Email, Please try again", Toast.LENGTH_LONG).show();
 				}
@@ -115,7 +112,7 @@ public class LogIn extends Activity {
 				String url3 = "http://54.191.168.116:3001/accounts/login";
 
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
-						jsonObj.toString()) {
+						jsonObj.toString(), keepsignin) {
 
 					@SuppressWarnings("unchecked")
 					@Override

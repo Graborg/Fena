@@ -51,7 +51,6 @@ public class MyProfile extends Activity{
 	        case R.id.action_edit:
 	        	Intent openMainPoint = new Intent("android.intent.action.REDPROFILE");
 				startActivity(openMainPoint);
-				finish();
 	            return true;
 	        case R.id.action_settings:
 	            return true;

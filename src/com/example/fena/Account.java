@@ -2,15 +2,21 @@ package com.example.fena;
 
 import java.util.ArrayList;
 
+import android.content.SharedPreferences.Editor;
+
 public class Account {
 	private String token;
 	private int account_id;
-	public int person_id;
 
-	public Account(String token, String account_id) {
+	public Account(String token, String account_id, boolean keepsignin) {
 		this.token = token;
 		this.account_id = Integer.parseInt(account_id);
-		
+		if(keepsignin){
+			Editor editor = Splash.sharedpreferences.edit();
+			editor.putString("token", this.token);
+			editor.putInt("account_id", this.account_id);
+			editor.commit();
+		}
 	}
 
 	public String getToken() {
