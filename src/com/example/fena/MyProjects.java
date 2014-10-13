@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MyProjects extends Activity {
-	private Database db;
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
 	static ProjectArrayAdapter adapter;
 
@@ -27,7 +26,6 @@ public class MyProjects extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_main);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		db = new Database();
 		List<Project> projects = LogIn.account.getMyProjects();
 		final ListView listview = (ListView) this.findViewById(R.id.listview);
 
@@ -59,11 +57,6 @@ public class MyProjects extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.myproject, menu);
 		return true;
-	}
-	@Override
-	protected void onRestart() {
-		super.onRestart();
-		db.update(this);
 	}
 	
 	@Override

@@ -12,19 +12,21 @@ import android.widget.TextView;
 
 public class MyProject extends Activity{
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
-	private int projectId;
+	private Database db;
+	static int projectId;
 	private Project project;
-	private TextView title;
-	private TextView subtitle;
-	private TextView reqskills;
-	private TextView description;
-	private TextView gain;
-	private ImageView image;
+	static TextView title;
+	static TextView subtitle;
+	static TextView reqskills;
+	static TextView description;
+	static TextView gain;
+	static ImageView image;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.myproject);
 		Intent intent = getIntent();
+		db = new Database();
 		projectId = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, -1);
 		
 		for(Project pro: LogIn.projects){
@@ -76,6 +78,12 @@ public class MyProject extends Activity{
 	}
 	
 	@Override
+	protected void onRestart() {
+		super.onRestart();
+		db.update(this);
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
@@ -83,7 +91,6 @@ public class MyProject extends Activity{
 	        	Intent openMainPoint = new Intent("android.intent.action.EDITPROJECT");
 	        	openMainPoint.putExtra(EXTRA_MESSAGE, projectId);
 				startActivity(openMainPoint);
-				finish();
 	            return true;
 	        case R.id.action_settings:
 	            return true;

@@ -99,6 +99,19 @@ public abstract class JsonProjectreceiver extends
 			MyProjects.adapter.clear();
 			MyProjects.adapter.addAll(LogIn.account.getMyProjects());
 			MyProjects.adapter.notifyDataSetChanged();
+			Project project = null;
+			for(Project pro: LogIn.projects){
+				if(pro.getId() == MyProject.projectId){
+					project = pro;
+				}
+			}
+			if(project != null){
+				MyProject.title.setText(project.getTitle());
+				MyProject.subtitle.setText(project.getSubheading());
+				MyProject.reqskills.setText(project.getRequested_skills());
+				MyProject.description.setText(project.getDescription());
+				MyProject.gain.setText(project.getGains());
+			}
 		}
 	}
 
