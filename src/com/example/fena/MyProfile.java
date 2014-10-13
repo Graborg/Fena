@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MyProfile extends Activity{
@@ -26,14 +27,25 @@ public class MyProfile extends Activity{
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		TextView expectation = (TextView) findViewById(R.id.tvExpectation);
 		expectation.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		
+		ImageView pic = (ImageView) findViewById(R.id.imageView1);
 		Person person = LogIn.account.getMyProfile();
 		
 		name.setText(person.getName());
 		expectation.setText(person.getExpectations());
 		skills.setText(person.getSkills());
 		description.setText(person.getDescription());
-		
+		switch(person.getImage()){
+		case 0: pic.setImageResource(R.drawable.pic0);
+		break;
+		case 1: pic.setImageResource(R.drawable.pic1);
+		break;
+		case 2: pic.setImageResource(R.drawable.pic2);
+		break;
+		case 3: pic.setImageResource(R.drawable.pic3);
+		break;
+		default: pic.setImageResource(R.drawable.pic0);
+		break;
+		}
 
 	}
 	

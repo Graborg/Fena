@@ -72,8 +72,14 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 		if (mProgressDialog != null || mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
-		activity.startActivity(new Intent("android.intent.action.MAINFENALOGIN"));
+		
+		Intent i = new Intent(activity, MainActivityLogin.class);
+		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		activity.startActivity(i);
 		activity.finish();
+		
+		//activity.startActivity(new Intent("android.intent.action.MAINFENALOGIN"));
+		//activity.finish();
 		return new Account(token, account_id, keepsignin);
 	}
 

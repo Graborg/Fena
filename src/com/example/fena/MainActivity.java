@@ -33,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -403,11 +404,24 @@ public class MainActivity extends FragmentActivity {
 			label.setText(persons.get(position).getName());
 			TextView secondLine = (TextView) rowView
 					.findViewById(R.id.secondLine);
-			secondLine.setText(persons.get(position).getMail());
+			secondLine.setText(persons.get(position).getDescription());
 			String[] day = persons.get(position).getUpdated().split("T");
 			String[] time = day[1].split("\\.");
 			TextView date = (TextView) rowView.findViewById(R.id.date);
 			date.setText(day[0] + "\n" + time[0]);
+			ImageView pic = (ImageView) rowView.findViewById(R.id.icon);
+			switch(persons.get(position).getImage()){
+			case 0: pic.setImageResource(R.drawable.pic0);
+			break;
+			case 1: pic.setImageResource(R.drawable.pic1);
+			break;
+			case 2: pic.setImageResource(R.drawable.pic2);
+			break;
+			case 3: pic.setImageResource(R.drawable.pic3);
+			break;
+			default: pic.setImageResource(R.drawable.pic0);
+			break;
+			}
 			return rowView;
 		}
 
@@ -445,6 +459,19 @@ public class MainActivity extends FragmentActivity {
 			String[] time = day[1].split("\\.");
 			TextView date = (TextView) rowView.findViewById(R.id.date);
 			date.setText(day[0] + "\n" + time[0]);
+			ImageView pic = (ImageView) rowView.findViewById(R.id.icon);
+			switch(projects.get(position).getImage()){
+			case 0: pic.setImageResource(R.drawable.pic0);
+			break;
+			case 1: pic.setImageResource(R.drawable.pic1);
+			break;
+			case 2: pic.setImageResource(R.drawable.pic2);
+			break;
+			case 3: pic.setImageResource(R.drawable.pic3);
+			break;
+			default: pic.setImageResource(R.drawable.pic0);
+			break;
+			}
 			return rowView;
 		}
 

@@ -23,6 +23,10 @@ public class Project {
 	private String updated_at;
 	@SerializedName("account_id")
 	private int account_id;
+	@SerializedName("show_project")
+	private int show_project;
+	@SerializedName("image")
+	private int image;
 
 	public Integer getId() {
 		return id;
@@ -62,5 +66,11 @@ public class Project {
 	
 	public int getAccountId(){
 		return account_id;
+	}
+	public int getShowProject(){
+		return show_project;
+	}
+	public int getImage(){
+		return image;
 	}
 }

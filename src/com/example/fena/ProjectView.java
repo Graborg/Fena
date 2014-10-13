@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class ProjectView extends Activity{
 		TextView description = (TextView) findViewById(R.id.tvDescription_proj);
 		TextView gain = (TextView) findViewById(R.id.tvGains);
 		Button contact = (Button) findViewById(R.id.bContactProj);
+		ImageView image = (ImageView) findViewById(R.id.imageView1);
+		
 		
 		title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		title.setText(project.getTitle());
@@ -50,6 +53,19 @@ public class ProjectView extends Activity{
 		contact.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 		
+		switch(project.getImage()){
+		case 0: image.setImageResource(R.drawable.pic0);
+		break;
+		case 1: image.setImageResource(R.drawable.pic1);
+		break;
+		case 2: image.setImageResource(R.drawable.pic2);
+		break;
+		case 3: image.setImageResource(R.drawable.pic3);
+		break;
+		default: image.setImageResource(R.drawable.pic0);
+		break;
+		}
+		
 		contact.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -63,10 +79,9 @@ public class ProjectView extends Activity{
 									new DialogInterface.OnClickListener() {
 										public void onClick(
 												DialogInterface dialog, int id) {
-											Intent i = new Intent(ProjectView.this, LogIn.class);
-											i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-											startActivity(i);
-											finish();
+											Intent openMainPoint = new Intent(
+													"android.intent.action.LOGIN");
+											startActivity(openMainPoint);
 										}
 									})
 							.setNegativeButton("Cancel",

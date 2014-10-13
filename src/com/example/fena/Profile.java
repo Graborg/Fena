@@ -7,12 +7,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ public class Profile extends Activity{
 		TextView description = (TextView) findViewById(R.id.tvDescription);
 		TextView expectation = (TextView) findViewById(R.id.tvExpectation);
 		Button contact = (Button) findViewById(R.id.bContactProj);
+		ImageView pic = (ImageView) findViewById(R.id.pic);
 		
 		name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		name.setText(person.getName());
@@ -43,6 +46,19 @@ public class Profile extends Activity{
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		description.setText(person.getDescription());
 		contact.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		
+		switch(person.getImage()){
+		case 0: pic.setImageResource(R.drawable.pic0);
+		break;
+		case 1: pic.setImageResource(R.drawable.pic1);
+		break;
+		case 2: pic.setImageResource(R.drawable.pic2);
+		break;
+		case 3: pic.setImageResource(R.drawable.pic3);
+		break;
+		default: pic.setImageResource(R.drawable.pic0);
+		break;
+		}
 		
 		contact.setOnClickListener(new View.OnClickListener() {
 			
@@ -57,11 +73,9 @@ public class Profile extends Activity{
 									new DialogInterface.OnClickListener() {
 										public void onClick(
 												DialogInterface dialog, int id) {
-											Intent i = new Intent(Profile.this, LogIn.class);
-											// set the new task and clear flags
-											i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-											startActivity(i);
-											finish();
+											Intent openMainPoint = new Intent(
+													"android.intent.action.LOGIN");
+											startActivity(openMainPoint);
 										}
 									})
 							.setNegativeButton("Cancel",

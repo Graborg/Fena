@@ -13,14 +13,16 @@ public class Person {
 	private String skills;
 	@SerializedName("description")
 	private String description;
-	@SerializedName("mail")
-	private String mail;
 	@SerializedName("created_at")
 	private String created_at;
 	@SerializedName("updated_at")
 	private String updated_at;
 	@SerializedName("account_id")
 	private int account_id;
+	@SerializedName("show_profile")
+	private int show_profile;
+	@SerializedName("image")
+	private int image;
 
 	public Integer getId() {
 		return id;
@@ -42,10 +44,6 @@ public class Person {
 		return description;
 	}
 
-	public String getMail() {
-		return mail;
-	}
-	
 	public String getCreated(){
 		return created_at;
 	}
@@ -75,5 +73,11 @@ public class Person {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public int getShowProfile(){
+		return show_profile;
+	}
+	public int getImage(){
+		return image;
 	}
 }

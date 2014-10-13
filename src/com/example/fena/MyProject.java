@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MyProject extends Activity{
@@ -26,13 +27,14 @@ public class MyProject extends Activity{
 				project = pro;
 			}
 		}
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		TextView title = (TextView) findViewById(R.id.tvTitel);
 		TextView subtitle = (TextView) findViewById(R.id.tvSubtitel);
 		TextView reqskills = (TextView) findViewById(R.id.tvReqskills);
 		TextView description = (TextView) findViewById(R.id.tvDescription_proj);
 		TextView gain = (TextView) findViewById(R.id.tvGains);
+		ImageView image = (ImageView) findViewById(R.id.imageView1);
 		
 		title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		title.setText(project.getTitle());
@@ -44,6 +46,19 @@ public class MyProject extends Activity{
 		description.setText(project.getDescription());
 		gain.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		gain.setText(project.getGains());
+		
+		switch(project.getImage()){
+		case 0: image.setImageResource(R.drawable.pic0);
+		break;
+		case 1: image.setImageResource(R.drawable.pic1);
+		break;
+		case 2: image.setImageResource(R.drawable.pic2);
+		break;
+		case 3: image.setImageResource(R.drawable.pic3);
+		break;
+		default: image.setImageResource(R.drawable.pic0);
+		break;
+		}
 		
 
 	}
@@ -68,7 +83,7 @@ public class MyProject extends Activity{
 	        case R.id.action_settings:
 	            return true;
 		    case android.R.id.home:
-		        //NavUtils.navigateUpFromSameTask(this);
+		        NavUtils.navigateUpFromSameTask(this);
 		        return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
