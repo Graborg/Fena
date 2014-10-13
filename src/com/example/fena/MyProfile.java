@@ -11,25 +11,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MyProfile extends Activity{
-	
+	private Database db;
+	static TextView name;
+	static TextView skills;
+	static TextView description;
+	static TextView expectation;
+	static ImageView pic;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.myprofile);
-		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		TextView name = (TextView) findViewById(R.id.tvName);
+		db = new Database();
+		name = (TextView) findViewById(R.id.tvName);
 		name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		TextView skills = (TextView) findViewById(R.id.tvskills);
+		skills = (TextView) findViewById(R.id.tvskills);
 		skills.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		TextView description = (TextView) findViewById(R.id.tvDescription);
+		description = (TextView) findViewById(R.id.tvDescription);
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		TextView expectation = (TextView) findViewById(R.id.tvExpectation);
+		expectation = (TextView) findViewById(R.id.tvExpectation);
 		expectation.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		ImageView pic = (ImageView) findViewById(R.id.imageView1);
+		pic = (ImageView) findViewById(R.id.imageView1);
 		Person person = LogIn.account.getMyProfile();
-		
 		name.setText(person.getName());
 		expectation.setText(person.getExpectations());
 		skills.setText(person.getSkills());
@@ -46,15 +49,23 @@ public class MyProfile extends Activity{
 		default: pic.setImageResource(R.drawable.pic0);
 		break;
 		}
-
 	}
 	
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		db.update(this);
+	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.myprofile, menu);
 		return true;
 	}
+	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

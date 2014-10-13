@@ -41,8 +41,8 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity {
 
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
-	public static PersonArrayAdapter adapter;
-	public static ProjectArrayAdapter adapter2;
+	static PersonArrayAdapter adapter;
+	static ProjectArrayAdapter adapter2;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -152,8 +152,6 @@ public class MainActivity extends FragmentActivity {
 		// Handle action buttons
 		switch (item.getItemId()) {
 		case R.id.action_refresh:
-			adapter.clear();
-			adapter2.clear();
 			db.update(this);
 		case R.id.action_search:
 			return true;

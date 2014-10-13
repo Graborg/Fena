@@ -73,6 +73,7 @@ public abstract class JsonPut extends AsyncTask<String, String, Integer>
 		if (mProgressDialog != null || mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
+		
 		activity.finish();
 		return Integer.parseInt(profile_id);
 	}
@@ -81,7 +82,6 @@ public abstract class JsonPut extends AsyncTask<String, String, Integer>
 		if (mProgressDialog != null || mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
-
 		if (account != null) {
 			receiveData(account);
 		}

@@ -95,6 +95,11 @@ public abstract class JsonProjectreceiver extends
 			MainActivityLogin.adapter2.addAll(LogIn.projects);
 			MainActivityLogin.adapter2.notifyDataSetChanged();
 		}
+		if(MyProjects.adapter != null && LogIn.account != null){
+			MyProjects.adapter.clear();
+			MyProjects.adapter.addAll(LogIn.account.getMyProjects());
+			MyProjects.adapter.notifyDataSetChanged();
+		}
 	}
 
 	private InputStream retrieveStream(String url) {

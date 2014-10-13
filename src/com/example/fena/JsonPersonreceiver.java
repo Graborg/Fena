@@ -23,9 +23,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -96,6 +99,14 @@ public abstract class JsonPersonreceiver extends
 			MainActivityLogin.adapter.addAll(LogIn.persons);
 			MainActivityLogin.adapter.notifyDataSetChanged();
 		}
+		if(LogIn.account != null && MyProfile.name != null){
+			Person person = LogIn.account.getMyProfile();
+			MyProfile.name.setText(person.getName());
+			MyProfile.expectation.setText(person.getExpectations());
+			MyProfile.skills.setText(person.getSkills());
+			MyProfile.description.setText(person.getDescription());
+		}
+
 	}
 
 	private InputStream retrieveStream(String url) {

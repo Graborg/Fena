@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ebe4d3"
+        android:background="#eeeeee"
         android:orientation="vertical" >
 
         <EditText
@@ -76,6 +76,14 @@
             android:minHeight="100dp"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <CheckBox
+            android:id="@+id/cb_showprofile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Show Profile"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="fill_parent"

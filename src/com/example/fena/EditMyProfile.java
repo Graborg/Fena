@@ -1,5 +1,7 @@
 package com.example.fena;
 
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,6 +10,7 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import android.app.Activity;
@@ -20,25 +23,38 @@ public class EditMyProfile extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_profile);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-
 		Person person = LogIn.account.getMyProfile();
 		Button save = (Button) findViewById(R.id.bSave);
-		save.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		save.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		Button cancel = (Button) findViewById(R.id.bCancel);
-		cancel.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		cancel.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		final EditText name = (EditText) findViewById(R.id.edName);
-		name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		name.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		final EditText skills = (EditText) findViewById(R.id.edSkills);
-		skills.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		skills.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		final EditText expectation = (EditText) findViewById(R.id.edExpectation);
-		expectation.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		expectation.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		final EditText description = (EditText) findViewById(R.id.edDescription);
-		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		description.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		name.setText(person.getName());
+		final CheckBox showprofile = (CheckBox) findViewById(R.id.cb_showprofile);
+		showprofile.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
+		if (person.getShowProfile() == 1) {
+			showprofile.setChecked(true);
+		} else {
+			showprofile.setChecked(false);
+		}
+
 		skills.setText(person.getSkills());
 		expectation.setText(person.getExpectations());
 		description.setText(person.getDescription());
-		
 
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -47,7 +63,13 @@ public class EditMyProfile extends Activity {
 				String jsonExpectation = expectation.getText().toString();
 				String jsonSkills = skills.getText().toString();
 				String jsonDesciption = description.getText().toString();
-				Integer jsonShowProfile = 1;
+				Integer jsonShowProfile;
+				if (showprofile.isChecked()) {
+					jsonShowProfile = 1;
+				} else {
+					jsonShowProfile = 0;
+				}
+
 				Integer jsonImage = 0;
 				JSONObject jsonObj = new JSONObject();
 				try {
@@ -60,18 +82,21 @@ public class EditMyProfile extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url = "http://54.191.168.116:3001/persons/" + LogIn.account.getMyProfile().getId();
-				JsonPut callbackservice3 = new JsonPut(EditMyProfile.this, jsonObj.toString(), LogIn.account.getToken()) {
-					//behövs??
+				String url3 = "http://54.191.168.116:3001/persons/"
+						+ LogIn.account.getMyProfile().getId();
+				JsonPut callbackservice3 = new JsonPut(EditMyProfile.this,
+						jsonObj.toString(), LogIn.account.getToken()) {
+					// behövs??
 					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
 						int profile_id = (Integer) object;
 					}
 				};
-				callbackservice3.execute(url, null, null);
-				
+				callbackservice3.execute(url3, null, null);
+
 			}
+
 		});
 
 		cancel.setOnClickListener(new View.OnClickListener() {

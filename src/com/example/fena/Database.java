@@ -13,9 +13,6 @@ import android.widget.Toast;
 
 public class Database {
 
-	//private ArrayList<Person> persons;
-	//private ArrayList<Project> projects;
-
 	public void update(Activity activity) {
 		String url = "http://54.191.168.116:3001/persons/";
 		JsonPersonreceiver callbackservice = new JsonPersonreceiver(activity) {

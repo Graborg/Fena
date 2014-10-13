@@ -14,11 +14,16 @@ public class MyProject extends Activity{
 	public final static String EXTRA_MESSAGE = "com.example.fena.MESSAGE";
 	private int projectId;
 	private Project project;
+	private TextView title;
+	private TextView subtitle;
+	private TextView reqskills;
+	private TextView description;
+	private TextView gain;
+	private ImageView image;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.myproject);
-		
 		Intent intent = getIntent();
 		projectId = intent.getIntExtra(MyProjects.EXTRA_MESSAGE, -1);
 		
@@ -29,22 +34,23 @@ public class MyProject extends Activity{
 		}
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		TextView title = (TextView) findViewById(R.id.tvTitel);
-		TextView subtitle = (TextView) findViewById(R.id.tvSubtitel);
-		TextView reqskills = (TextView) findViewById(R.id.tvReqskills);
-		TextView description = (TextView) findViewById(R.id.tvDescription_proj);
-		TextView gain = (TextView) findViewById(R.id.tvGains);
-		ImageView image = (ImageView) findViewById(R.id.imageView1);
+		title = (TextView) findViewById(R.id.tvTitel);
+		subtitle = (TextView) findViewById(R.id.tvSubtitel);
+		reqskills = (TextView) findViewById(R.id.tvReqskills);
+		description = (TextView) findViewById(R.id.tvDescription_proj);
+		gain = (TextView) findViewById(R.id.tvGains);
+		image = (ImageView) findViewById(R.id.imageView1);
 		
 		title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		title.setText(project.getTitle());
 		subtitle.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		subtitle.setText(project.getSubheading());
 		reqskills.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		reqskills.setText(project.getRequested_skills());
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		description.setText(project.getDescription());
 		gain.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+
+		title.setText(project.getTitle());
+		subtitle.setText(project.getSubheading());
+		reqskills.setText(project.getRequested_skills());
+		description.setText(project.getDescription());
 		gain.setText(project.getGains());
 		
 		switch(project.getImage()){
@@ -59,9 +65,8 @@ public class MyProject extends Activity{
 		default: image.setImageResource(R.drawable.pic0);
 		break;
 		}
-		
-
 	}
+
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

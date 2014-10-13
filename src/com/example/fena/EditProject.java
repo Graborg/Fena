@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class EditProject extends Activity {
@@ -56,13 +57,21 @@ public class EditProject extends Activity {
 		final EditText mail = (EditText) findViewById(R.id.edMail_proj);
 		mail.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-
+		final CheckBox showprofile = (CheckBox) findViewById(R.id.cb_showproject);
+		showprofile.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		
+		
 		title.setText(project.getTitle());
 		subtitle.setText(project.getSubheading());
 		description.setText(project.getDescription());
 		skills.setText(project.getRequested_skills());
 		time.setText(project.getTimePlan());
 		gains.setText(project.getGains());
+		if(project.getShowProject() == 1){
+			showprofile.setChecked(true);
+		}else{
+			showprofile.setChecked(false);
+		}
 
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -73,7 +82,12 @@ public class EditProject extends Activity {
 				String jsonGains = gains.getText().toString();
 				String jsonDesciption = description.getText().toString();
 				String jsonTime = time.getText().toString();
-				Integer jsonShowProfile = 1;
+				Integer jsonShowProject;
+				if(showprofile.isChecked()){
+					jsonShowProject = 1;
+				}else{
+					jsonShowProject = 0;
+				}
 				Integer jsonImage = 0;
 				JSONObject jsonObj = new JSONObject();
 				try {
@@ -83,7 +97,7 @@ public class EditProject extends Activity {
 					jsonObj.put("gains", jsonGains);
 					jsonObj.put("description", jsonDesciption);
 					jsonObj.put("time_plan", jsonTime);
-					jsonObj.put("show_project", jsonShowProfile);
+					jsonObj.put("show_project", jsonShowProject);
 					jsonObj.put("image", jsonImage);
 				} catch (JSONException e) {
 					e.printStackTrace();

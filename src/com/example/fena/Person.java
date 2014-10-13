@@ -56,24 +56,6 @@ public class Person {
 		return account_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void SetExpectations(String expectations) {
-		this.expectations = expectations;
-	}
-
-	public void setSkills(String skills) {
-		this.skills = skills;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 	public int getShowProfile(){
 		return show_profile;
 	}

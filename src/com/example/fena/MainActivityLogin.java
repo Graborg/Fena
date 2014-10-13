@@ -148,8 +148,6 @@ public class MainActivityLogin extends FragmentActivity {
 		// Handle action buttons
 		switch (item.getItemId()) {
 		case R.id.action_refresh:
-			adapter.clear();
-			adapter2.clear();
 			db.update(this);
 		default:
 			return super.onOptionsItemSelected(item);
