@@ -36,7 +36,7 @@
                 android:src="@drawable/ic_launcher" />
 
             <TextView
-                android:id="@+id/tvExpectation"
+                android:id="@+id/tvDescription1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -44,7 +44,7 @@
                 android:background="@drawable/textviewshape"
                 android:minHeight="110dp"
                 android:padding="10dp"
-                android:text="Experience1"
+                android:text="Description"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
@@ -65,7 +65,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/tvDescription"
+            android:id="@+id/tvExpectation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -75,7 +75,7 @@
             android:layout_weight="1.5"
             android:background="@drawable/textviewshape"
             android:padding="10dp"
-            android:text="Description1"
+            android:text="Expectation"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <RelativeLayout

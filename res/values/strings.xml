@@ -9,15 +9,15 @@
     </string-array>
 
     <string name="redprofile_activity">RedProfile</string>
-    <string name="app_name">FENA</string>
+    <string name="app_name">Connection Board</string>
     <string name="action_refresh">Update</string>
     <string name="action_settings">Send Feedback</string>
     <string name="action_search">Search</string>
     <string name="action_edit">Edit</string>
     <string name="action_new">New Project </string>
-    <string name="title_section1">Sökande Personer</string>
-    <string name="title_section2">Idéer och projekt</string>
-    <string name="title_section3">Företagsannonser</string>
+    <string name="title_section1">People</string>
+    <string name="title_section2">Projects and ideas</string>
+    <string name="title_section3">Business Listings</string>
 
     <string-array name="drawer_array">
         <item>Start</item>

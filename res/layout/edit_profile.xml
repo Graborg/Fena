@@ -36,12 +36,12 @@
                 android:src="@drawable/ic_launcher" />
 
             <EditText
-                android:id="@+id/edExpectation"
+                android:id="@+id/edDescription1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/textviewshape"
-                android:hint="Experience"
+                android:hint="Descripton"
                 android:minHeight="110dp"
                 android:padding="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -64,7 +64,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/edDescription"
+            android:id="@+id/edExpectation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -72,7 +72,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/textviewshape"
-            android:hint="Description"
+            android:hint="Expectation"
             android:minHeight="100dp"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
