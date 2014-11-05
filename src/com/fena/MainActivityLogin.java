@@ -3,18 +3,23 @@ package com.fena;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import com.fena.MainActivity.PersonArrayAdapter;
+import com.fena.MainActivity.setupSearchView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -28,10 +33,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.MenuInflater;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 public class MainActivityLogin extends FragmentActivity {
@@ -42,14 +49,12 @@ public class MainActivityLogin extends FragmentActivity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-
 	private CharSequence mDrawerTitle;
-
 	private CharSequence mTitle;
 	private String[] mDrawerTitles;
 	static Activity activity;
 	SectionsPagerAdapter mSectionsPagerAdapter;
-
+	private static SearchView mSearchView;
 	private MenuItem menuItem;
 	private Database db;
 
@@ -130,8 +135,11 @@ public class MainActivityLogin extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
+		MenuItem searchItem = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) searchItem.getActionView();
+        setupSearchView s = new setupSearchView();
+        s.setupSearch(searchItem);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -549,4 +557,73 @@ public class MainActivityLogin extends FragmentActivity {
 		}
 
 	}
+	
+    public static class setupSearchView implements SearchView.OnQueryTextListener{
+        
+    	private void setupSearch(MenuItem searchItem) {
+    		int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+    		TextView textView = (TextView) mSearchView.findViewById(id);
+    		textView.setTextColor(Color.WHITE);
+    		
+
+            if (isAlwaysExpanded()) {
+                mSearchView.setIconifiedByDefault(false);
+            } else {
+                searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                        | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+            }
+
+            SearchManager searchManager = (SearchManager) activity.getSystemService(Context.SEARCH_SERVICE);
+            if (searchManager != null) {
+                List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+
+                SearchableInfo info = searchManager.getSearchableInfo(activity.getComponentName());
+                for (SearchableInfo inf : searchables) {
+                    if (inf.getSuggestAuthority() != null
+                            && inf.getSuggestAuthority().startsWith("applications")) {
+                        info = inf;
+                    }
+                }
+                mSearchView.setSearchableInfo(info);
+            }
+
+            mSearchView.setOnQueryTextListener(this);
+        }
+
+        public boolean onQueryTextChange(String newText) {
+        	System.out.println("Query = " + newText);
+        	ArrayList <Person> person = new ArrayList<Person>();
+        	for(int i = 0; i < LogIn.persons.size(); i++){
+        		if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.persons.get(i).getName()).find()){
+        			person.add(LogIn.persons.get(i));
+        		}
+        	}
+        	MainActivityLogin.adapter.clear();
+			MainActivityLogin.adapter.addAll(person);
+			MainActivityLogin.adapter.notifyDataSetChanged();
+    		ArrayList<Project> project = new ArrayList<Project>();
+    		for(int n = 0; n < LogIn.projects.size(); n++){
+    			if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.projects.get(n).getTitle()).find()){
+    				project.add(LogIn.projects.get(n));
+    			}
+    		}
+    		MainActivityLogin.adapter2.clear();
+    		MainActivityLogin.adapter2.addAll(project);
+    		MainActivityLogin.adapter2.notifyDataSetChanged();
+            return false;
+        }
+
+        public boolean onQueryTextSubmit(String query) {
+            InputMethodManager imm = (InputMethodManager)activity.getSystemService(
+            	      Context.INPUT_METHOD_SERVICE);
+            	imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+            return false;
+        }
+
+
+        protected boolean isAlwaysExpanded() {
+            return false;
+        }
+    	
+    }
 }
