@@ -58,7 +58,7 @@ public class ProjectView extends Activity{
 		gain.setText("Gains: " + project.getGains() + "\n" +"Time: " + project.getTimePlan() + "\n");
 		contact.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		
+
 		switch(project.getImage()){
 		case 0:
 			pic.setImageResource(R.drawable.icon_bar96_gradient);

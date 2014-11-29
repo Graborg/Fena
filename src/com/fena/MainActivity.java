@@ -118,6 +118,7 @@ public class MainActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setOffscreenPageLimit(3);
 		db.update(this);
 	}
 	
@@ -230,8 +231,6 @@ public class MainActivity extends FragmentActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			// View rootView = inflater.inflate(R.layout.fragment_planet,
-			// container, false);
 			int i = getArguments().getInt(ARG_INDEX_NUMBER);
 			View rootView = null;
 			if (i == 0) {
@@ -266,8 +265,9 @@ public class MainActivity extends FragmentActivity {
 			// below) with the page number as its lone argument.
 			android.support.v4.app.Fragment fragment = new TabSectionFragment();
 			Bundle args = new Bundle();
-			args.putInt(TabSectionFragment.ARG_SECTION_NUMBER, position + 1);
+			args.putInt(TabSectionFragment.ARG_SECTION_NUMBER, position+1);
 			fragment.setArguments(args);
+			//fragment.setRetainInstance(true);
 			return fragment;
 		}
 
@@ -310,7 +310,6 @@ public class MainActivity extends FragmentActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-
 			View rootView = inflater.inflate(R.layout.fragment_main_tab,
 					container, false);
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
@@ -325,13 +324,11 @@ public class MainActivity extends FragmentActivity {
 
 				final ListView listview = (ListView) rootView
 						.findViewById(R.id.listview);
-
 				adapter = new PersonArrayAdapter(getActivity()
 						.getApplicationContext(),
 						android.R.layout.simple_list_item_1, person);
-
 				listview.setAdapter(adapter);
-
+				
 				listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 					@Override
@@ -345,7 +342,6 @@ public class MainActivity extends FragmentActivity {
 
 					}
 				});
-
 			}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
 				ArrayList<Project> project;
@@ -525,24 +521,24 @@ public class MainActivity extends FragmentActivity {
         }
 
         public boolean onQueryTextChange(String newText) {
-        	System.out.println("Query = " + newText);
-        	ArrayList <Person> person = new ArrayList<Person>();
+        	ArrayList<Person> pe = new ArrayList<Person>();
         	for(int i = 0; i < LogIn.persons.size(); i++){
         		if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.persons.get(i).getName()).find()){
-        			person.add(LogIn.persons.get(i));
+        			pe.add(LogIn.persons.get(i));
         		}
         	}
-        	MainActivity.adapter.clear();
-    		MainActivity.adapter.addAll(person);
-    		MainActivity.adapter.notifyDataSetChanged();
+        	
     		ArrayList<Project> project = new ArrayList<Project>();
     		for(int n = 0; n < LogIn.projects.size(); n++){
     			if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.projects.get(n).getTitle()).find()){
     				project.add(LogIn.projects.get(n));
     			}
     		}
+    		MainActivity.adapter.clear();
     		MainActivity.adapter2.clear();
+    		MainActivity.adapter.addAll(pe);
     		MainActivity.adapter2.addAll(project);
+    		MainActivity.adapter.notifyDataSetChanged();
     		MainActivity.adapter2.notifyDataSetChanged();
             return false;
         }
