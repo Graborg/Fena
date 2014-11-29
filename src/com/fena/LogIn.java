@@ -44,6 +44,9 @@ public class LogIn extends Activity {
 		Button blogin = (Button) findViewById(R.id.blogin);
 		blogin.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
+		Button breset = (Button) findViewById(R.id.breset);
+		blogin.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Roboto-Light.ttf"));
 		final CheckBox cbkeepsignin = (CheckBox) findViewById(R.id.cbkeepsignin);
 		cbkeepsignin.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
@@ -122,6 +125,36 @@ public class LogIn extends Activity {
 				};
 				callbackservice3.execute(url3, null, null);
 				}
+			}
+		});
+		
+		breset.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String mail = edmail.getText().toString();
+				if(!validEmail(mail)){
+					Toast.makeText(getApplicationContext(), "Invalid Email, Please try again", Toast.LENGTH_LONG).show();
+				}
+				else{
+				JSONObject jsonObj = new JSONObject();
+				try {
+					jsonObj.put("username", mail);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				String url = "http://54.191.168.116:3001/password_resets";
+
+				JsonResetPost callbackservice = new JsonResetPost(LogIn.this,
+						jsonObj.toString()) {
+					@SuppressWarnings("unchecked")
+					@Override
+					public void receiveData(Object object) {
+					}
+				};
+				callbackservice.execute(url, null, null);
+				}
+				
 			}
 		});
 
