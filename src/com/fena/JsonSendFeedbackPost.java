@@ -15,27 +15,26 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
+public abstract class JsonSendFeedbackPost extends AsyncTask<String, String, Void>
 		implements CallbackReceiver {
 	private ProgressDialog mProgressDialog;
 	Handler handler;
 	Runnable callback;
 	Activity activity;
-	private String jsonAccount;
+	private String jsonObj;
+	private String token;
 	final Toast toast; 
-	private boolean keepsignin;
 
-	public JsonLogInPost(Activity activity, String jsonAccount, boolean keepsignin) {
+	public JsonSendFeedbackPost(Activity activity, String token, String jsonObj) {
+		this.token = token;
 		this.activity = activity;
-		this.keepsignin = keepsignin;
-		this.jsonAccount = jsonAccount;
-		toast = Toast.makeText(activity.getApplicationContext(), "Wrong username or password\nPlease try again", Toast.LENGTH_LONG);
+		this.jsonObj = jsonObj;
+		toast = Toast.makeText(activity.getApplicationContext(), "Connection Error", Toast.LENGTH_LONG);
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage("Loading Please Wait.");
 		mProgressDialog.setIndeterminate(false);
@@ -50,8 +49,8 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 	}
 
 	@Override
-	protected Account doInBackground(String... url) {
-		String source = retrieveStream(url[0], jsonAccount);
+	protected Void doInBackground(String... url) {
+		String source = retrieveStream(url[0], jsonObj, token);
 		if (source == null) {
 			if (mProgressDialog != null || mProgressDialog.isShowing()) {
 				mProgressDialog.dismiss();
@@ -59,29 +58,19 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 			toast.show();
 			return null;
 		}
+		toast.setText("Mail successfully sent");
+		toast.show();
 		JSONObject json = null;
-		String token = null;
-		String account_id = null;
 		try {
 			json = new JSONObject(source);
-			token = json.getString("token");
-			System.out.println("Token: " + token);
-			account_id = json.getString("account_id");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		if (mProgressDialog != null || mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
-		
-		Intent i = new Intent(activity, MainActivityLogin.class);
-		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-		activity.startActivity(i);
 		activity.finish();
-		
-		//activity.startActivity(new Intent("android.intent.action.MAINFENALOGIN"));
-		//activity.finish();
-		return new Account(token, account_id, keepsignin);
+		return null;
 	}
 
 	protected void onPostExecute(Account account) {
@@ -93,24 +82,23 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 			}
 		}
 
-	private String retrieveStream(String url, String jsonAccount) {
+	private String retrieveStream(String url, String jsonObject, String token) {
 
 		HttpClient client = new DefaultHttpClient();
 
 		HttpPost httpPost = new HttpPost(url);
 
 		try {
-			StringEntity entity = new StringEntity(jsonAccount, "UTF8");
+			StringEntity entity = new StringEntity(jsonObject, "UTF8");
 			httpPost.setEntity(entity);
 			httpPost.setHeader("Content-type", "application/json");
+			httpPost.addHeader("Authorization", "Token token=\"" + token + "\"");
 			HttpResponse response = client.execute(httpPost);
 			final int statusCode = response.getStatusLine().getStatusCode();
-			System.out.println(statusCode);
-
 			if (statusCode != HttpStatus.SC_OK) {
 				Log.w(getClass().getSimpleName(), "Error " + statusCode
 						+ " for URL " + url);
-				toast.setText("Wrong username or password\nPlease try again");
+				toast.setText("Connection error (" + statusCode + ")");
 				return null;
 			}
 

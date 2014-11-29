@@ -165,6 +165,8 @@ public class MainActivity extends FragmentActivity {
 		case R.id.action_search:
 			return true;
 		case R.id.action_settings:
+			Intent openMainPoint = new Intent("android.intent.action.SENDFEEDBACK");
+			startActivity(openMainPoint);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

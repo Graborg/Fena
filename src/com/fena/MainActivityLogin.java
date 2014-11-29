@@ -123,7 +123,7 @@ public class MainActivityLogin extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-
+		mViewPager.setOffscreenPageLimit(3);
 		db.update(this);
 	}
 	@Override
@@ -164,6 +164,12 @@ public class MainActivityLogin extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_refresh:
 			db.update(this);
+		case R.id.action_search:
+			return true;
+		case R.id.action_settings:
+			Intent openMainPoint = new Intent("android.intent.action.SENDFEEDBACK");
+			startActivity(openMainPoint);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -591,22 +597,22 @@ public class MainActivityLogin extends FragmentActivity {
         }
 
         public boolean onQueryTextChange(String newText) {
-        	System.out.println("Query = " + newText);
         	ArrayList <Person> person = new ArrayList<Person>();
         	for(int i = 0; i < LogIn.persons.size(); i++){
         		if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.persons.get(i).getName()).find()){
         			person.add(LogIn.persons.get(i));
         		}
         	}
-        	MainActivityLogin.adapter.clear();
-			MainActivityLogin.adapter.addAll(person);
-			MainActivityLogin.adapter.notifyDataSetChanged();
+        	
     		ArrayList<Project> project = new ArrayList<Project>();
     		for(int n = 0; n < LogIn.projects.size(); n++){
     			if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.projects.get(n).getTitle()).find()){
     				project.add(LogIn.projects.get(n));
     			}
     		}
+    		MainActivityLogin.adapter.clear();
+			MainActivityLogin.adapter.addAll(person);
+			MainActivityLogin.adapter.notifyDataSetChanged();
     		MainActivityLogin.adapter2.clear();
     		MainActivityLogin.adapter2.addAll(project);
     		MainActivityLogin.adapter2.notifyDataSetChanged();
