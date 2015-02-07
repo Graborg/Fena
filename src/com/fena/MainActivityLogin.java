@@ -131,11 +131,18 @@ public class MainActivityLogin extends FragmentActivity {
 		mDrawerList.setItemChecked(0, true);
 		super.onResume();
 	}
+	
+	@Override
+	protected void onRestart() {
+		Database db = new Database();
+		db.update(this);
+		super.onRestart();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.mainlogin, menu);
 		MenuItem searchItem = menu.findItem(R.id.action_search);
         mSearchView = (SearchView) searchItem.getActionView();
         setupSearchView s = new setupSearchView();
@@ -286,6 +293,11 @@ public class MainActivityLogin extends FragmentActivity {
 				Editor editor = Splash.sharedpreferences.edit();
 				editor.clear();
 				editor.commit();
+				MyProfile.name = null;
+				MyProfile.skills = null;
+				MyProfile.description = null;
+				MyProfile.expectation = null;
+				MyProfile.pic = null;
 				rootView = null;
 				startActivity(openMainPoint);
 				activity.finish();

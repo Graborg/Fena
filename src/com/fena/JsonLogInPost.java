@@ -65,7 +65,6 @@ public abstract class JsonLogInPost extends AsyncTask<String, String, Account>
 		try {
 			json = new JSONObject(source);
 			token = json.getString("token");
-			System.out.println("Token: " + token);
 			account_id = json.getString("account_id");
 		} catch (JSONException e) {
 			e.printStackTrace();

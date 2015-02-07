@@ -59,7 +59,6 @@ public abstract class JsonPost extends AsyncTask<String, String, Integer>
 		}
 		toast.setText("Update Successful");
 		toast.show();
-		System.out.println("JsonProfilePost:" + source);
 		JSONObject json = null;
 		String profile_id = null;
 		try {

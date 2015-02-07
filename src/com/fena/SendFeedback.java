@@ -36,6 +36,7 @@ private Activity activity;
 			public void onClick(View v) {
 				try {
 					jsonObj.put("feedback", edfeedback.getText().toString());
+					jsonObj.put("OS", 3);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -46,7 +47,6 @@ private Activity activity;
 					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
-						//profile_id = (Integer) object;
 					}
 				};
 				callbackservice3.execute(url, null, null);

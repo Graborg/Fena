@@ -128,6 +128,14 @@ public class MainActivity extends FragmentActivity {
 		super.onResume();
 	}
 
+	
+	@Override
+	protected void onRestart() {
+		Database db = new Database();
+		db.update(this);
+		super.onRestart();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -163,10 +171,6 @@ public class MainActivity extends FragmentActivity {
 		case R.id.action_refresh:
 			db.update(this);
 		case R.id.action_search:
-			return true;
-		case R.id.action_settings:
-			Intent openMainPoint = new Intent("android.intent.action.SENDFEEDBACK");
-			startActivity(openMainPoint);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -319,7 +323,12 @@ public class MainActivity extends FragmentActivity {
 				if (LogIn.persons == null) {
 					person = new ArrayList<Person>();
 				} else {
-					person = LogIn.persons;
+					person = new ArrayList<Person>();
+					for(int i = 0; i < LogIn.persons.size(); i++){
+						if(LogIn.persons.get(i).getShowProfile() != 0){
+							person.add(LogIn.persons.get(i));
+						}
+					}
 				}
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
@@ -350,8 +359,14 @@ public class MainActivity extends FragmentActivity {
 				if (LogIn.projects == null) {
 					project = new ArrayList<Project>();
 				} else {
-					project = LogIn.projects;
+					project = new ArrayList<Project>();
+					for(int i = 0; i < LogIn.projects.size(); i++){
+						if(LogIn.projects.get(i).getShowProject() != 0){
+							project.add(LogIn.projects.get(i));
+						}
+					}
 				}
+				System.out.println("Projectview create Main");
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
 
