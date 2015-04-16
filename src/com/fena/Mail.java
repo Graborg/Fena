@@ -28,7 +28,7 @@ public class Mail {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		String url = "http://54.191.168.116:3001/mail/mail_account";
+		String url = "https://connectionboard.se/mail/mail_account";
 		JsonMailPost callbackservice3 = new JsonMailPost(activity, token, jsonObj.toString()) {
 			//behövs ???
 			@SuppressWarnings("unchecked")
@@ -54,7 +54,7 @@ public class Mail {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		String url = "http://54.191.168.116:3001/mail/mail_account";
+		String url = "https://connectionboard.se/mail/mail_account";
 		JsonMailPost callbackservice3 = new JsonMailPost(activity, token, jsonObj.toString()) {
 			//behövs ???
 			@SuppressWarnings("unchecked")

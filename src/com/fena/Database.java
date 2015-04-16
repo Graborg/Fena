@@ -6,7 +6,7 @@ import android.app.Activity;
 public class Database {
 
 	public void update(Activity activity) {
-		String url = "http://54.191.168.116:3001/persons/";
+		String url = "https://connectionboard.se/persons/";
 		JsonPersonreceiver callbackservice = new JsonPersonreceiver(activity) {
 			@SuppressWarnings("unchecked")
 			@Override
@@ -18,7 +18,7 @@ public class Database {
 		callbackservice.execute(url, null, null);
 
 		// Project
-		String url2 = "http://54.191.168.116:3001/projects/";
+		String url2 = "https://connectionboard.se/projects/";
 		JsonProjectreceiver callbackservice2 = new JsonProjectreceiver(activity) {
 			@SuppressWarnings("unchecked")
 			@Override

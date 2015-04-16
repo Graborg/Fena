@@ -77,7 +77,7 @@ public class LogIn extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url3 = "http://54.191.168.116:3001/accounts";
+				String url3 = "https://connectionboard.se/accounts";
 
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
 						jsonObj.toString(), keepsignin) {
@@ -112,7 +112,7 @@ public class LogIn extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url3 = "http://54.191.168.116:3001/accounts/login";
+				String url3 = "https://connectionboard.se/accounts/login";
 
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
 						jsonObj.toString(), keepsignin) {
@@ -143,7 +143,7 @@ public class LogIn extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url = "http://54.191.168.116:3001/password_resets";
+				String url = "https://connectionboard.se/password_resets";
 
 				JsonResetPost callbackservice = new JsonResetPost(LogIn.this,
 						jsonObj.toString()) {

@@ -102,7 +102,7 @@ public class EditProject extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url = "http://54.191.168.116:3001/projects/"
+				String url = "https://connectionboard.se/projects/"
 						+ project.getId();
 				System.out.println("Project id" + project.getId());
 				JsonPut callbackservice3 = new JsonPut(EditProject.this,

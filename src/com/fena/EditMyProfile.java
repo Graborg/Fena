@@ -96,7 +96,7 @@ public class EditMyProfile extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url3 = "http://54.191.168.116:3001/persons/"
+				String url3 = "https://connectionboard.se/persons/"
 						+ LogIn.account.getMyProfile().getId();
 				JsonPut callbackservice3 = new JsonPut(EditMyProfile.this,
 						jsonObj.toString(), LogIn.account.getToken()) {

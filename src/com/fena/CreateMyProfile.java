@@ -57,7 +57,7 @@ public class CreateMyProfile extends Activity {
 					e.printStackTrace();
 				}
 				System.out.println(jsonObj.toString());
-				String url = "http://54.191.168.116:3001/persons";
+				String url = "https://connectionboard.se/persons";
 				JsonPost callbackservice3 = new JsonPost(CreateMyProfile.this, jsonObj.toString(), LogIn.account.getToken()) {
 					//behövs ???
 					@SuppressWarnings("unchecked")

@@ -40,7 +40,7 @@ private Activity activity;
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url = "http://54.191.168.116:3001/mail/mail_feedback";
+				String url = "https://connectionboard.se/mail/mail_feedback";
 				System.out.println("SendFeed, Token: " + LogIn.account.getToken());
 				System.out.println("SendFeed, string: " + jsonObj.toString());
 				JsonMailPost callbackservice3 = new JsonMailPost(activity, LogIn.account.getToken() , jsonObj.toString()) {
