@@ -22,7 +22,9 @@ public class LogIn extends Activity {
 
 	static ArrayList<Person> persons;
 	static ArrayList<Project> projects;
+	static ArrayList<Project> showProjects;
 	static Account account;
+	public static ArrayList<Person> showPersons;
 	
 	private boolean keepsignin;
 
@@ -45,7 +47,7 @@ public class LogIn extends Activity {
 		blogin.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 		Button breset = (Button) findViewById(R.id.breset);
-		blogin.setTypeface(Typeface.createFromAsset(getAssets(),
+		breset.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 		final CheckBox cbkeepsignin = (CheckBox) findViewById(R.id.cbkeepsignin);
 		cbkeepsignin.setTypeface(Typeface.createFromAsset(getAssets(),

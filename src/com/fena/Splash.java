@@ -23,8 +23,6 @@ public class Splash extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		
-		LogIn.persons = null;
-		LogIn.projects = null;
 		String token = sharedpreferences.getString("token", null);
 		//System.out.println(token);
 		String accountId = Integer.toString(sharedpreferences.getInt("account_id", -1));

@@ -94,13 +94,13 @@ public class MainActivity extends FragmentActivity {
 		) {
 			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(mTitle);
-				invalidateOptionsMenu(); // creates call to
+				//invalidateOptionsMenu(); // creates call to
 											// onPrepareOptionsMenu()
 			}
 
 			public void onDrawerOpened(View drawerView) {
 				getActionBar().setTitle(mDrawerTitle);
-				invalidateOptionsMenu(); // creates call to
+				//invalidateOptionsMenu(); // creates call to
 											// onPrepareOptionsMenu()
 			}
 		};
@@ -320,15 +320,10 @@ public class MainActivity extends FragmentActivity {
 					container, false);
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
 				ArrayList<Person> person;
-				if (LogIn.persons == null) {
+				if (LogIn.showPersons == null) {
 					person = new ArrayList<Person>();
 				} else {
-					person = new ArrayList<Person>();
-					for(int i = 0; i < LogIn.persons.size(); i++){
-						if(LogIn.persons.get(i).getShowProfile() != 0){
-							person.add(LogIn.persons.get(i));
-						}
-					}
+					person = LogIn.showPersons;
 				}
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
@@ -356,17 +351,11 @@ public class MainActivity extends FragmentActivity {
 			}
 			if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
 				ArrayList<Project> project;
-				if (LogIn.projects == null) {
+				if (LogIn.showProjects == null) {
 					project = new ArrayList<Project>();
 				} else {
-					project = new ArrayList<Project>();
-					for(int i = 0; i < LogIn.projects.size(); i++){
-						if(LogIn.projects.get(i).getShowProject() != 0){
-							project.add(LogIn.projects.get(i));
-						}
-					}
+					project = LogIn.showProjects;
 				}
-				System.out.println("Projectview create Main");
 				rootView = inflater.inflate(R.layout.list_main, container,
 						false);
 
@@ -539,16 +528,16 @@ public class MainActivity extends FragmentActivity {
 
         public boolean onQueryTextChange(String newText) {
         	ArrayList<Person> pe = new ArrayList<Person>();
-        	for(int i = 0; i < LogIn.persons.size(); i++){
-        		if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.persons.get(i).getName()).find()){
-        			pe.add(LogIn.persons.get(i));
+        	for(int i = 0; i < LogIn.showPersons.size(); i++){
+        		if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.showPersons.get(i).getName()).find()){
+        			pe.add(LogIn.showPersons.get(i));
         		}
         	}
         	
     		ArrayList<Project> project = new ArrayList<Project>();
-    		for(int n = 0; n < LogIn.projects.size(); n++){
-    			if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.projects.get(n).getTitle()).find()){
-    				project.add(LogIn.projects.get(n));
+    		for(int n = 0; n < LogIn.showProjects.size(); n++){
+    			if(Pattern.compile(Pattern.quote(newText), Pattern.CASE_INSENSITIVE).matcher(LogIn.showProjects.get(n).getTitle()).find()){
+    				project.add(LogIn.showProjects.get(n));
     			}
     		}
     		MainActivity.adapter.clear();

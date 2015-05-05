@@ -94,6 +94,7 @@ public abstract class JsonPersonreceiver extends
 				p.add(LogIn.persons.get(i));
 			}
 		}
+		LogIn.showPersons = p;
 		if(MainActivity.adapter != null){
 		MainActivity.adapter.clear();
 		MainActivity.adapter.addAll(p);

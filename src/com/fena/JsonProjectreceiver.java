@@ -86,6 +86,7 @@ public abstract class JsonProjectreceiver extends
 				p.add(LogIn.projects.get(i));
 			}
 		}
+		LogIn.showProjects = p;
 		if(MainActivity.adapter2 != null){
 		MainActivity.adapter2.clear();
 		MainActivity.adapter2.addAll(p);
