@@ -11,11 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class CreateMyProfile extends Activity {
-	private int profile_id;
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_profile);
@@ -24,7 +21,7 @@ public class CreateMyProfile extends Activity {
 		name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		final EditText expectation = (EditText) findViewById(R.id.edDescription1);
 		expectation.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		final EditText skills = (EditText) findViewById(R.id.edSkills);
+		final EditText skills = (EditText) findViewById(R.id.edSkills1);
 		skills.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		final EditText description = (EditText) findViewById(R.id.edExpectation);
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
@@ -59,11 +56,9 @@ public class CreateMyProfile extends Activity {
 				System.out.println(jsonObj.toString());
 				String url = "https://connectionboard.se/persons";
 				JsonPost callbackservice3 = new JsonPost(CreateMyProfile.this, jsonObj.toString(), LogIn.account.getToken()) {
-					//behövs ???
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
-						profile_id = (Integer) object;
+						//int profile_id = (Integer) object;
 					}
 				};
 				callbackservice3.execute(url, null, null);

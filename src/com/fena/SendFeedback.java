@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 public class SendFeedback extends Activity{
 private Activity activity;
@@ -41,10 +40,7 @@ private Activity activity;
 					e.printStackTrace();
 				}
 				String url = "https://connectionboard.se/mail/mail_feedback";
-				System.out.println("SendFeed, Token: " + LogIn.account.getToken());
-				System.out.println("SendFeed, string: " + jsonObj.toString());
 				JsonMailPost callbackservice3 = new JsonMailPost(activity, LogIn.account.getToken() , jsonObj.toString()) {
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
 					}

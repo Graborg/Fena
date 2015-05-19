@@ -1,5 +1,7 @@
 package com.fena;
 
+import java.util.Random;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,8 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class CreateProject extends Activity{
-	private int project_id;
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_project);
@@ -41,9 +41,6 @@ public class CreateProject extends Activity{
 		final EditText gains = (EditText) findViewById(R.id.edGains);
 		gains.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		final EditText mail = (EditText) findViewById(R.id.edMail_proj);
-		mail.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Roboto-Light.ttf"));
 
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -55,7 +52,8 @@ public class CreateProject extends Activity{
 				String jsonDesciption = description.getText().toString();
 				String jsonTime = time.getText().toString();
 				Integer jsonShowProfile = 1;
-				Integer jsonImage = 0;
+				Random rand = new Random();
+				Integer jsonImage = rand.nextInt(4);
 				JSONObject jsonObj = new JSONObject();
 				try {
 					jsonObj.put("title", jsonTitle);
@@ -73,11 +71,9 @@ public class CreateProject extends Activity{
 				String url = "https://connectionboard.se/projects/";
 				JsonPost callbackservice3 = new JsonPost(CreateProject.this,
 						jsonObj.toString(), LogIn.account.getToken()) {
-					// behövs??
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
-						int project_id = (Integer) object;
+						//int project_id = (Integer) object;
 					}
 				};
 				callbackservice3.execute(url, null, null);

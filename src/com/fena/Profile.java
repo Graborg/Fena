@@ -7,9 +7,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,9 +38,9 @@ public class Profile extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		TextView name = (TextView) findViewById(R.id.tvName);
-		TextView skills = (TextView) findViewById(R.id.tvskills);
+		TextView skills = (TextView) findViewById(R.id.tvSkills1);
 		TextView expectation = (TextView) findViewById(R.id.tvExpectation);
-		TextView description = (TextView) findViewById(R.id.tvDescription1);
+		TextView description = (TextView) findViewById(R.id.tvDescription);
 		Button contact = (Button) findViewById(R.id.bContactProj);
 		ImageView pic = (ImageView) findViewById(R.id.pic);
 
@@ -49,13 +49,13 @@ public class Profile extends Activity {
 		name.setText(person.getName());
 		expectation.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		expectation.setText(person.getExpectations());
+		expectation.setText(Html.fromHtml("<b>" + "Expectation: " + "</b><br /> " + person.getExpectations()));
 		skills.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		skills.setText(person.getSkills());
+		skills.setText(Html.fromHtml("<b>" + "Skills: " + "</b> <br /> " + person.getSkills()));
 		description.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		description.setText(person.getDescription());
+		description.setText(Html.fromHtml("<b>" + "Description: " + "</b> <br /> " + person.getDescription()));
 		contact.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 

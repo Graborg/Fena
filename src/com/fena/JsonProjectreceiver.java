@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -86,6 +89,11 @@ public abstract class JsonProjectreceiver extends
 				p.add(LogIn.projects.get(i));
 			}
 		}
+		Collections.sort(p, new Comparator<Project>() {
+		    public int compare(Project one, Project other) {
+		        return other.getUpdated().compareTo(one.getUpdated());
+		    }
+		});
 		LogIn.showProjects = p;
 		if(MainActivity.adapter2 != null){
 		MainActivity.adapter2.clear();

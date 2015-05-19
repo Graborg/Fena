@@ -1,5 +1,7 @@
 package com.fena;
 
+import java.util.Random;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class EditProject extends Activity {
 	private Project project;
@@ -54,11 +57,9 @@ public class EditProject extends Activity {
 		final EditText gains = (EditText) findViewById(R.id.edGains);
 		gains.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		final EditText mail = (EditText) findViewById(R.id.edMail_proj);
-		mail.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Roboto-Light.ttf"));
 		final CheckBox showprofile = (CheckBox) findViewById(R.id.cb_showproject);
 		showprofile.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		final ImageView pic = (ImageView) findViewById(R.id.imageView1);
 		
 		
 		title.setText(project.getTitle());
@@ -71,6 +72,18 @@ public class EditProject extends Activity {
 			showprofile.setChecked(true);
 		}else{
 			showprofile.setChecked(false);
+		}
+		switch(project.getImage()){
+		case 0: pic.setImageResource(R.drawable.prof_blue);
+		break;
+		case 1: pic.setImageResource(R.drawable.prof_red);
+		break;
+		case 2: pic.setImageResource(R.drawable.prof_orange);
+		break;
+		case 3: pic.setImageResource(R.drawable.prof_green);
+		break;
+		default: pic.setImageResource(R.drawable.prof_blue);
+		break;
 		}
 
 		save.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +101,8 @@ public class EditProject extends Activity {
 				}else{
 					jsonShowProject = 0;
 				}
-				Integer jsonImage = 0;
+				Random rand = new Random();
+				Integer jsonImage = rand.nextInt(4);
 				JSONObject jsonObj = new JSONObject();
 				try {
 					jsonObj.put("title", jsonTitle);
@@ -107,10 +121,9 @@ public class EditProject extends Activity {
 				System.out.println("Project id" + project.getId());
 				JsonPut callbackservice3 = new JsonPut(EditProject.this,
 						jsonObj.toString(), LogIn.account.getToken()) {
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
-						int profile_id = (Integer) object;
+						//int profile_id = (Integer) object;
 					}
 				};
 				callbackservice3.execute(url, null, null);

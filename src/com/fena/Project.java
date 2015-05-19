@@ -1,4 +1,8 @@
 package com.fena;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Project {
@@ -53,6 +57,9 @@ public class Project {
 	}
 
 	public String getTimePlan() {
+		if(time_plan == null){
+			return "No Timeplan";
+		}
 		return time_plan;
 	}
 	
@@ -60,8 +67,16 @@ public class Project {
 		return created_at;
 	}
 	
-	public String getUpdated(){
-		return updated_at;
+	public Date getUpdated(){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		Date date = new Date(0);
+		try {
+			date = dateFormat.parse(updated_at);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
 	}
 	
 	public int getAccountId(){

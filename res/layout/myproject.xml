@@ -13,11 +13,10 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_weight="0.2"
-        android:scaleType="center"
-        android:src="@drawable/earth" />
+        android:src="@drawable/prof_blue" />
 
     <TextView
         android:id="@+id/tvTitel"
@@ -64,7 +63,7 @@
         android:background="@drawable/textviewshape"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:text="Goals"
+        android:text="Reqskills"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -80,7 +79,7 @@
         android:background="@drawable/textviewshape"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:text="Gain\nMail\nTime"
+        android:text="Gain\nTime"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

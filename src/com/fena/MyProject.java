@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -51,26 +52,21 @@ public class MyProject extends Activity{
 
 		title.setText(project.getTitle());
 		subtitle.setText(project.getSubheading());
-		reqskills.setText(project.getRequested_skills());
-		description.setText(project.getDescription());
-		gain.setText(project.getGains());
+		reqskills.setText(Html.fromHtml("<b>" + "Requested skills: " + "</b><br /> " + project.getRequested_skills()));
+		description.setText(Html.fromHtml("<b>" + "Description: " + "</b><br /> " + project.getDescription()));
+		gain.setText(Html.fromHtml("<b>" + "Gains: " + "</b><br /> " + project.getGains() + "<br />" + "<b>" + "Time Plan: " + "</b><br /> " + project.getTimePlan()));
 		
 		switch(project.getImage()){
-		case 0:
-			pic.setImageResource(R.drawable.icon_bar96_gradient);
-			break;
-		case 1:
-			pic.setImageResource(R.drawable.icon_bar96_gradient);
-			break;
-		case 2:
-			pic.setImageResource(R.drawable.icon_bar96_gradient);
-			break;
-		case 3:
-			pic.setImageResource(R.drawable.icon_bar96_gradient);
-			break;
-		default:
-			pic.setImageResource(R.drawable.icon_bar96_gradient);
-			break;
+		case 0: pic.setImageResource(R.drawable.prof_blue);
+		break;
+		case 1: pic.setImageResource(R.drawable.prof_red);
+		break;
+		case 2: pic.setImageResource(R.drawable.prof_orange);
+		break;
+		case 3: pic.setImageResource(R.drawable.prof_green);
+		break;
+		default: pic.setImageResource(R.drawable.prof_blue);
+		break;
 		}
 	}
 

@@ -100,10 +100,6 @@ public class MyProjects extends Activity {
 			TextView secondLine = (TextView) rowView
 					.findViewById(R.id.secondLine);
 			secondLine.setText(projects.get(position).getSubheading());
-			String[] day = projects.get(position).getUpdated().split("T");
-			String[] time = day[1].split("\\.");
-			TextView date = (TextView) rowView.findViewById(R.id.date);
-			date.setText(day[0] + "\n" + time[0]);
 			return rowView;
 		}
 

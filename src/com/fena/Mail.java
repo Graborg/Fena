@@ -30,8 +30,6 @@ public class Mail {
 		}
 		String url = "https://connectionboard.se/mail/mail_account";
 		JsonMailPost callbackservice3 = new JsonMailPost(activity, token, jsonObj.toString()) {
-			//behövs ???
-			@SuppressWarnings("unchecked")
 			@Override
 			public void receiveData(Object object) {
 				//profile_id = (Integer) object;
@@ -56,8 +54,6 @@ public class Mail {
 		}
 		String url = "https://connectionboard.se/mail/mail_account";
 		JsonMailPost callbackservice3 = new JsonMailPost(activity, token, jsonObj.toString()) {
-			//behövs ???
-			@SuppressWarnings("unchecked")
 			@Override
 			public void receiveData(Object object) {
 				//profile_id = (Integer) object;

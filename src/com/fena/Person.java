@@ -1,5 +1,9 @@
 package com.fena;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Person {
@@ -48,8 +52,16 @@ public class Person {
 		return created_at;
 	}
 	
-	public String getUpdated(){
-		return updated_at;
+	public Date getUpdated(){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		Date date = new Date(0);
+		try {
+			date = dateFormat.parse(updated_at);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
 	}
 	
 	public int getAccountId(){

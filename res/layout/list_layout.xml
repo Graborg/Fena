@@ -1,9 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeightLarge"
-    android:background="@drawable/cell"
+   	android:background="#ffffff"
     android:padding="6dip" >
-
+    
+ <!--  android:background="@drawable/cell"-->
+ 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="60dp"
@@ -24,6 +26,7 @@
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Description"
+        android:textColor="#655e5e"
         android:textSize="14sp" />
 
     <TextView

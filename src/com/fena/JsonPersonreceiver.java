@@ -6,21 +6,15 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.SingleClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -28,6 +22,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -94,7 +89,14 @@ public abstract class JsonPersonreceiver extends
 				p.add(LogIn.persons.get(i));
 			}
 		}
+		Collections.sort(p, new Comparator<Person>() {
+		    public int compare(Person one, Person other) {
+		        return other.getUpdated().compareTo(one.getUpdated());
+		    }
+		});
 		LogIn.showPersons = p;
+		 
+		
 		if(MainActivity.adapter != null){
 		MainActivity.adapter.clear();
 		MainActivity.adapter.addAll(p);
@@ -108,9 +110,9 @@ public abstract class JsonPersonreceiver extends
 		if(LogIn.account != null && MyProfile.name != null){
 			Person person = LogIn.account.getMyProfile();
 			MyProfile.name.setText(person.getName());
-			MyProfile.expectation.setText(person.getExpectations());
-			MyProfile.skills.setText(person.getSkills());
-			MyProfile.description.setText(person.getDescription());
+			MyProfile.expectation.setText(Html.fromHtml("<b>" + "Expectation: " + "</b> <br /> " + person.getExpectations()));
+			MyProfile.skills.setText(Html.fromHtml("<b>" + "Skills: " + "</b> <br /> " + person.getSkills()));
+			MyProfile.description.setText(Html.fromHtml("<b>" + "Description: " + "</b> <br /> " + person.getDescription()));
 		}
 
 	}

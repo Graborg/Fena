@@ -83,7 +83,6 @@ public class LogIn extends Activity {
 
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
 						jsonObj.toString(), keepsignin) {
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
 						account = (Account) object;
@@ -119,7 +118,6 @@ public class LogIn extends Activity {
 				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
 						jsonObj.toString(), keepsignin) {
 
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
 						account = (Account) object;
@@ -149,7 +147,6 @@ public class LogIn extends Activity {
 
 				JsonResetPost callbackservice = new JsonResetPost(LogIn.this,
 						jsonObj.toString()) {
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
 					}

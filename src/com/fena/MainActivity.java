@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -22,8 +21,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.text.Spannable;
-import android.text.SpannableString;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -154,7 +152,7 @@ public class MainActivity extends FragmentActivity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// If the nav drawer is open, hide action items related to the content
 		// view
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		//boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
 		// menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -412,11 +410,7 @@ public class MainActivity extends FragmentActivity {
 			label.setText(persons.get(position).getName());
 			TextView secondLine = (TextView) rowView
 					.findViewById(R.id.secondLine);
-			secondLine.setText(persons.get(position).getDescription());
-			String[] day = persons.get(position).getUpdated().split("T");
-			String[] time = day[1].split("\\.");
-			TextView date = (TextView) rowView.findViewById(R.id.date);
-			date.setText(day[0] + "\n" + time[0]);
+			secondLine.setText(persons.get(position).getSkills());
 			ImageView pic = (ImageView) rowView.findViewById(R.id.icon);
 			switch (persons.get(position).getImage()) {
 			case 0: pic.setImageResource(R.drawable.prof_blue);
@@ -463,27 +457,18 @@ public class MainActivity extends FragmentActivity {
 			TextView secondLine = (TextView) rowView
 					.findViewById(R.id.secondLine);
 			secondLine.setText(projects.get(position).getSubheading());
-			String[] day = projects.get(position).getUpdated().split("T");
-			String[] time = day[1].split("\\.");
-			TextView date = (TextView) rowView.findViewById(R.id.date);
-			date.setText(day[0] + "\n" + time[0]);
 			ImageView pic = (ImageView) rowView.findViewById(R.id.icon);
 			switch (projects.get(position).getImage()) {
-			case 0:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			case 1:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			case 2:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			case 3:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			default:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
+			case 0: pic.setImageResource(R.drawable.prof_blue);
+			break;
+			case 1: pic.setImageResource(R.drawable.prof_red);
+			break;
+			case 2: pic.setImageResource(R.drawable.prof_orange);
+			break;
+			case 3: pic.setImageResource(R.drawable.prof_green);
+			break;
+			default: pic.setImageResource(R.drawable.prof_blue);
+			break;
 			}
 			return rowView;
 		}

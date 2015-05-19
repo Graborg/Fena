@@ -1,7 +1,5 @@
 package com.fena;
 
-import java.util.ArrayList;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +32,7 @@ public class EditMyProfile extends Activity {
 		final EditText name = (EditText) findViewById(R.id.edName);
 		name.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		final EditText skills = (EditText) findViewById(R.id.edSkills);
+		final EditText skills = (EditText) findViewById(R.id.edSkills1);
 		skills.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 		final EditText description = (EditText) findViewById(R.id.edDescription1);
@@ -100,11 +98,9 @@ public class EditMyProfile extends Activity {
 						+ LogIn.account.getMyProfile().getId();
 				JsonPut callbackservice3 = new JsonPut(EditMyProfile.this,
 						jsonObj.toString(), LogIn.account.getToken()) {
-					// behövs??
-					@SuppressWarnings("unchecked")
 					@Override
 					public void receiveData(Object object) {
-						int profile_id = (Integer) object;
+						//int profile_id = (Integer) object;
 					}
 				};
 				callbackservice3.execute(url3, null, null);

@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import com.fena.MainActivity.PersonArrayAdapter;
-import com.fena.MainActivity.setupSearchView;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -32,7 +29,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.MenuInflater;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -55,7 +51,6 @@ public class MainActivityLogin extends FragmentActivity {
 	static Activity activity;
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	private static SearchView mSearchView;
-	private MenuItem menuItem;
 	private Database db;
 
 	/**
@@ -155,7 +150,7 @@ public class MainActivityLogin extends FragmentActivity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// If the nav drawer is open, hide action items related to the content
 		// view
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		//boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
 		// menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -493,11 +488,11 @@ public class MainActivityLogin extends FragmentActivity {
 			label.setText(persons.get(position).getName());
 			TextView secondLine = (TextView) rowView
 					.findViewById(R.id.secondLine);
-			secondLine.setText(persons.get(position).getDescription());
-			String[] day = persons.get(position).getUpdated().split("T");
-			String[] time = day[1].split("\\.");
-			TextView date = (TextView) rowView.findViewById(R.id.date);
-			date.setText(day[0] + "\n" + time[0]);
+			secondLine.setText(persons.get(position).getSkills());
+//			String[] day = persons.get(position).getUpdated().split("T");
+//			String[] time = day[1].split("\\.");
+//			TextView date = (TextView) rowView.findViewById(R.id.date);
+//			date.setText(day[0] + "\n" + time[0]);
 			ImageView pic = (ImageView) rowView.findViewById(R.id.icon);
 			switch(persons.get(position).getImage()){
 			case 0: pic.setImageResource(R.drawable.prof_blue);
@@ -537,34 +532,23 @@ public class MainActivityLogin extends FragmentActivity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View rowView = inflater
-					.inflate(R.layout.list_layout, parent, false);
+			View rowView = inflater.inflate(R.layout.list_layout, parent, false);
 			TextView label = (TextView) rowView.findViewById(R.id.label);
 			label.setText(projects.get(position).getTitle());
-			TextView secondLine = (TextView) rowView
-					.findViewById(R.id.secondLine);
+			TextView secondLine = (TextView) rowView.findViewById(R.id.secondLine);
 			secondLine.setText(projects.get(position).getSubheading());
-			String[] day = projects.get(position).getUpdated().split("T");
-			String[] time = day[1].split("\\.");
-			TextView date = (TextView) rowView.findViewById(R.id.date);
-			date.setText(day[0] + "\n" + time[0]);
 			ImageView pic = (ImageView) rowView.findViewById(R.id.icon);
 			switch(projects.get(position).getImage()){
-			case 0:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			case 1:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			case 2:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			case 3:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
-			default:
-				pic.setImageResource(R.drawable.icon_bar96_gradient);
-				break;
+			case 0: pic.setImageResource(R.drawable.prof_blue);
+			break;
+			case 1: pic.setImageResource(R.drawable.prof_red);
+			break;
+			case 2: pic.setImageResource(R.drawable.prof_orange);
+			break;
+			case 3: pic.setImageResource(R.drawable.prof_green);
+			break;
+			default: pic.setImageResource(R.drawable.prof_blue);
+			break;
 			}
 			return rowView;
 		}

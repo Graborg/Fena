@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -25,18 +26,18 @@ public class MyProfile extends Activity{
 		db = new Database();
 		name = (TextView) findViewById(R.id.tvName);
 		name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		skills = (TextView) findViewById(R.id.tvskills);
+		skills = (TextView) findViewById(R.id.tvSkills1);
 		skills.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		expectation = (TextView) findViewById(R.id.tvExpectation);
 		expectation.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		description = (TextView) findViewById(R.id.tvDescription1);
+		description = (TextView) findViewById(R.id.tvDescription);
 		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		pic = (ImageView) findViewById(R.id.imageView1);
 		Person person = LogIn.account.getMyProfile();
 		name.setText(person.getName());
-		expectation.setText(person.getExpectations());
-		skills.setText(person.getSkills());
-		description.setText(person.getDescription());
+		expectation.setText(Html.fromHtml("<b>" + "Expectation: " + "</b> <br /> " + person.getExpectations()));
+		skills.setText(Html.fromHtml("<b>" + "Skills: " + "</b> <br /> " + person.getSkills()));
+		description.setText(Html.fromHtml("<b>" + "Description: " + "</b> <br /> " + person.getDescription()));
 		switch(person.getImage()){
 		case 0: pic.setImageResource(R.drawable.prof_blue);
 		break;
@@ -56,7 +57,7 @@ public class MyProfile extends Activity{
 	protected void onRestart() {
 		super.onRestart();
 		db.update(this);
-	}
+		}
 
 
 	@Override
