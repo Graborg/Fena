@@ -27,11 +27,22 @@
         </activity>
         <activity
             android:name="com.fena.LogIn"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:parentActivityName="com.fena.MainActivity" >
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.LOGIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.fena.SignUp"
+            android:label="@string/app_name"
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.SIGNUP" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -41,8 +52,10 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
-            <meta-data android:name="android.app.searchable"
-            android:resource="@drawable/searchable" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@drawable/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAINFENA" />
 
@@ -54,8 +67,10 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
-            <meta-data android:name="android.app.searchable"
-            android:resource="@drawable/searchable" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@drawable/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAINFENALOGIN" />
 
@@ -65,8 +80,8 @@
         <activity
             android:name="com.fena.EditMyProfile"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.fena.Profile" >
+            android:parentActivityName="com.fena.Profile"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.REDPROFILE" />
 
@@ -76,8 +91,8 @@
         <activity
             android:name="com.fena.Profile"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.fena.MainActivity" >
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.PROFILE" />
 
@@ -87,8 +102,8 @@
         <activity
             android:name="com.fena.ProjectView"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.fena.MainActivity" >
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.PROJECT" />
 
@@ -97,9 +112,9 @@
         </activity>
         <activity
             android:name="com.fena.EditProject"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:parentActivityName="com.fena.ProjectView" >
+            android:parentActivityName="com.fena.ProjectView"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.EDITPROJECT" />
 
@@ -109,8 +124,8 @@
         <activity
             android:name="com.fena.MyProfile"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.fena.MainActivity" >
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MYPROFILE" />
 
@@ -119,8 +134,8 @@
         </activity>
         <activity
             android:name="com.fena.CreateMyProfile"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATEMYPROFILE" />
 
@@ -130,8 +145,8 @@
         <activity
             android:name="com.fena.MyProjects"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.fena.MainActivity" >
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MYPROJECTS" />
 
@@ -140,8 +155,8 @@
         </activity>
         <activity
             android:name="com.fena.CreateProject"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATEPROJECT" />
 
@@ -150,9 +165,9 @@
         </activity>
         <activity
             android:name="com.fena.MyProject"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:parentActivityName="com.fena.MainActivity" >
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MYPROJECT" />
 
@@ -161,9 +176,9 @@
         </activity>
         <activity
             android:name="com.fena.SendFeedback"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:parentActivityName="com.fena.MainActivity" >
+            android:parentActivityName="com.fena.MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.SENDFEEDBACK" />
 

@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -20,21 +19,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LogIn extends Activity {
-
-	static ArrayList<Person> persons;
-	static ArrayList<Project> projects;
-	static ArrayList<Project> showProjects;
-	static Account account;
-	public static ArrayList<Person> showPersons;
-	
-	private boolean keepsignin;
+public class SignUp extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
+		setContentView(R.layout.signup);
 
 		TextView tvConnection = (TextView) findViewById(R.id.tvConnection);
 		tvConnection.setTypeface(Typeface.createFromAsset(getAssets(),
@@ -45,22 +36,12 @@ public class LogIn extends Activity {
 		Button bsignup = (Button) findViewById(R.id.bsign_up);
 		bsignup.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		Button blogin = (Button) findViewById(R.id.blogin);
-		blogin.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Roboto-Light.ttf"));
-		Button breset = (Button) findViewById(R.id.breset);
-		breset.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Roboto-Light.ttf"));
-		final CheckBox cbkeepsignin = (CheckBox) findViewById(R.id.cbkeepsignin);
-		cbkeepsignin.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Roboto-Light.ttf"));
 		final EditText edmail = (EditText) findViewById(R.id.edmail);
 		edmail.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
 		final EditText edpassword = (EditText) findViewById(R.id.edpassword);
 		edpassword.setTypeface(Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Light.ttf"));
-		//If the keyboard should appear when edittext is in focus.
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 	
 
@@ -69,20 +50,8 @@ public class LogIn extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				Intent openMainPoint = new Intent("android.intent.action.SIGNUP");
-				startActivity(openMainPoint);
-				finish();
-			}
-
-		});
-
-		blogin.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
 				String mail = edmail.getText().toString();
 				String password = edpassword.getText().toString();
-				keepsignin = cbkeepsignin.isChecked();
 				if(!validEmail(mail)){
 					Toast.makeText(getApplicationContext(), "Invalid Email, Please try again", Toast.LENGTH_LONG).show();
 				}
@@ -94,48 +63,20 @@ public class LogIn extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				String url3 = "https://connectionboard.se/accounts/login";
+				String url3 = "https://connectionboard.se/accounts";
 
-				JsonLogInPost callbackservice3 = new JsonLogInPost(LogIn.this,
-						jsonObj.toString(), keepsignin) {
-
+				JsonLogInPost callbackservice3 = new JsonLogInPost(SignUp.this,
+						jsonObj.toString(), true) {
 					@Override
 					public void receiveData(Object object) {
-						account = (Account) object;
+						LogIn.account = (Account) object;
+
 					}
 				};
 				callbackservice3.execute(url3, null, null);
 				}
 			}
-		});
-		
-		breset.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				String mail = edmail.getText().toString();
-				if(!validEmail(mail)){
-					Toast.makeText(getApplicationContext(), "Invalid Email, Please try again", Toast.LENGTH_LONG).show();
-				}
-				else{
-				JSONObject jsonObj = new JSONObject();
-				try {
-					jsonObj.put("username", mail);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				String url = "https://connectionboard.se/password_resets";
 
-				JsonResetPost callbackservice = new JsonResetPost(LogIn.this,
-						jsonObj.toString()) {
-					@Override
-					public void receiveData(Object object) {
-					}
-				};
-				callbackservice.execute(url, null, null);
-				}
-				
-			}
 		});
 
 	}
