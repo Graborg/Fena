@@ -18,10 +18,10 @@
 
     <TextView
         android:id="@+id/secondLine"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/label"
+        android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/icon"
         android:ellipsize="marquee"
         android:singleLine="true"
@@ -31,25 +31,16 @@
 
     <TextView
         android:id="@+id/label"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/secondLine"
         android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/secondLine"
         android:layout_alignWithParentIfMissing="true"
         android:layout_toRightOf="@id/icon"
         android:gravity="center_vertical"
         android:text="Example application"
         android:textColor="#000000"
         android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="19dp"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout> 

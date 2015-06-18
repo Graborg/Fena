@@ -19,12 +19,12 @@ public class CreateMyProfile extends Activity {
 		
 		final EditText name = (EditText) findViewById(R.id.edName);
 		name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		final EditText expectation = (EditText) findViewById(R.id.edDescription1);
-		expectation.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		final EditText description = (EditText) findViewById(R.id.edDescription1);
+		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		final EditText skills = (EditText) findViewById(R.id.edSkills1);
 		skills.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
-		final EditText description = (EditText) findViewById(R.id.edExpectation);
-		description.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
+		final EditText expectation = (EditText) findViewById(R.id.edExpectation);
+		expectation.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
 		
 		Button save = (Button) findViewById(R.id.bSave);
 		save.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf"));
